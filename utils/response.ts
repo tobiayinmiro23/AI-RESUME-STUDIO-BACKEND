@@ -9,5 +9,5 @@ type ResponseType = {
     
 export const response=({ message, status ,code}: ResponseType, res:Response)=>{
    
-    return  res.status(code ?? 200).json({ status, message });
+    res.status(code ?? 200).json({ status, message });
 }
