@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 
 type ResponseType = {
-    message: string | undefined;
+    message: string | undefined | object | unknown[];
     status: string;
     code?: number;
   };

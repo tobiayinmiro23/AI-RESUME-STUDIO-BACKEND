@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import {UserModel} from "../models/index";
 import bcrypt from "bcrypt";
 import { response } from "../utils/response";
+import {sign} from "../utils/jwt"
 class AuthService {
     async SignUp(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
         try {
@@ -21,11 +22,17 @@ class AuthService {
             const { email, password } = req.body;
             const user = await UserModel.findOne({ email });
             if (!user) return response({ message: "Invalid credentials", status: "fail" ,code: 401}, res);
-            const isMatch = await bcrypt.compare(password, user.password);
+            const isMatch = bcrypt.compare(password, user.password);
             if (!isMatch) return response({ message: "Invalid credentials", status: "fail" ,code: 401}, res);
-            return response({ message: "Signin successful", status: "success", code: 200 }, res);
+            let token = sign(user);
+            return response({ message: {
+                email: user.email,
+                id: user._id,
+                token
+            }, status: "success", code: 200 }, res);
         } catch (error) {
             // next(error);
+            console.log(error);
             return response({ message: "An error occurred during signin", status: "fail" ,code: 500}, res);
         }
     }
