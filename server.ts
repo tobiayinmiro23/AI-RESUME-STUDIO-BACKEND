@@ -25,8 +25,7 @@ app.get("/health", (_req: Request, res: Response) => {
 
 // ---------- Routes ----------
 app.use(router);
-// app.use("/api/resume", resumeRoutes);       
-// app.use("/api/ats", atsRoutes);             
+  
 
 
 // app.use(notFoundHandler);

@@ -5,7 +5,7 @@ class Auth {
         try {
             // Your signin logic here
             console.log(req.body)
-            return { message: "Signin successful" };
+            return  "Signin successful";
         } catch (error) {
             next(error);
         }
