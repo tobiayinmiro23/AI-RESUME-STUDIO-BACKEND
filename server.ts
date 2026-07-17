@@ -3,14 +3,14 @@ import router from "./route/index";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 
 dotenv.config();
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/resume-studio";
+// const MONGO_URI = process.env.DB_URL;
 
 // ---------- Global Middleware ----------
 app.use(helmet());
@@ -34,7 +34,7 @@ app.use(router);
 
 async function startServer() {
   try {
-    // await mongoose.connect(MONGO_URI);
+    await mongoose.connect(process.env.DB_URL || " ");
     console.log("[db] MongoDB connected");
 
     app.listen(PORT, () => {
