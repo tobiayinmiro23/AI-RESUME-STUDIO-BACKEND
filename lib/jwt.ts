@@ -1,5 +1,6 @@
-import { Request, Response, NextFunction } from "express";
 import jwt, {JwtPayload} from "jsonwebtoken";
+import { AppError } from "../utils/appError";
+
 
 interface AuthPayload extends JwtPayload {
   userId: string;
@@ -9,33 +10,43 @@ interface userType  {
   userId: string;
   email: string;
 }
-export const sign=(user: userType, options?: jwt.SignOptions): string => {
+type jwtResponseType = {
+    message: string | AuthPayload | object | unknown[];
+    success: boolean;
+  };
+  
+    
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new AppError("JWT_SECRET is not defined in environment variables",400);
+
+export const sign=(user: userType, options?: jwt.SignOptions): jwtResponseType => {
          const token=  jwt.sign( {
                 userId: user.userId,
                 email: user.email,
             },
-            process.env.JWT_SECRET!,
-            {
-                expiresIn: options?.expiresIn || "7d",
-            }
+            JWT_SECRET,
+            { expiresIn: options?.expiresIn || "7d" }
         )
-        return token;
+        let jwtResponse={ message: token, success: true };
+        return jwtResponse;
 
 };
-export const verify=(payload: string, userid:string) : string | boolean => {
+export const verify=(jwtToken: string) :jwtResponseType => {
         try{
-             const token=  jwt.verify( 
-                payload,
-                process.env.JWT_SECRET!,
+             const decodedToken=  jwt.verify( 
+                jwtToken,
+                JWT_SECRET,
             ) as AuthPayload;
-        if (token?.userId !== userid) return  "Invalid token"
-        return true;
+        return { message: decodedToken, success: true };
 
         }catch(err: unknown){
-            if (err instanceof jwt.TokenExpiredError)  return "Token has expired";
-            if (err instanceof jwt.JsonWebTokenError) return "Invalid token";
-            if (err instanceof Error) return err.message;
-            return "Unable to verify token";
+            if (err instanceof jwt.TokenExpiredError)   throw new AppError("Token has expired",401);
+                // return { message: "", success: false };
+            if (err instanceof jwt.JsonWebTokenError) throw new AppError("Invalid token",401);
+                // return { message: "Invalid token", success: false };
+            // if (err instanceof Error) return { message: err.message, success: false };
+            // return { message: "Unable to verify token", success: false };
+            throw new AppError("Unable to verify token",401);
         }
 
-    }
+}
