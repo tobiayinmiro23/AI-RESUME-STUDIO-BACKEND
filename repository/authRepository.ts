@@ -11,6 +11,9 @@ export class AuthRepository {
     async createOtp(email: string, codeHash: string, expiresAt: Date) {
         return await OtpModel.create({ email, codeHash, expiresAt });
     }
+    async updateOtpByEmail(email: string, codeHash: string, expiresAt: Date) {
+        return await OtpModel.updateOne({ email }, { codeHash, expiresAt });
+    }
     async findOtpByEmail(email: string) {
         return await OtpModel.findOne({ email });
     }

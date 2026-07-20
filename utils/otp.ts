@@ -8,7 +8,6 @@ export const generateOtp = (length = 6): string => {
     const randomIndex = crypto.randomInt(0, digits.length);
     otp += digits[randomIndex];
   }
-
   return otp;
 };
 
@@ -17,9 +16,10 @@ type OtpPayload = {
   expiresAt: Date;
 };
 
-export const generateOtpWithExpiry = (length = 6, ttlMinutes = 5): OtpPayload => {
+export const generateOtpWithExpiry = (length = 6, ttlMinutes = 1): OtpPayload => {
   return {
     code: generateOtp(length),
     expiresAt: new Date(Date.now() + ttlMinutes * 60 * 1000),
+    
   };
 };
