@@ -5,11 +5,14 @@ interface AuthPayload extends JwtPayload {
   userId: string;
   email: string;
 }
-
-export const sign=(user: unknown, options?: jwt.SignOptions): string => {
+interface userType  {
+  userId: string;
+  email: string;
+}
+export const sign=(user: userType, options?: jwt.SignOptions): string => {
          const token=  jwt.sign( {
-                userId: (user as { _id: string })._id,
-                email: (user as { email: string }).email,
+                userId: user.userId,
+                email: user.email,
             },
             process.env.JWT_SECRET!,
             {
