@@ -1,35 +1,34 @@
-import express, { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import authService from "../service/authService";
 import {response} from "../utils/response";
 import { signinValidator } from "../validation/validator";
+import { AppError } from "../utils/appError";
 
-const authValidator=(req:Request, res:Response)=>{
+const authValidator=(req:Request)=>{
         const {isValid, errMessage} = signinValidator(req.body);
-            if (!isValid) {
-                return response({ message: errMessage || "Invalid input data", status: "fail" ,code: 400}, res);
-            }
+        if (!isValid)  throw new AppError(errMessage || "Invalid user input", 400);
     }
 class authController {
 
-    async SignUpController(req: Request, res: Response, next: NextFunction) {
-        try {
-            authValidator(req, res);
-            let serviceResponse = await authService.SignUp(req, res, next);
-            return serviceResponse 
-        } catch (error: any) {
-                 return response({ message: error?.message || "An error occurred", status: "fail" ,code: 400}, res);
-        }
+    async SignUpController(req: Request, res:Response) {
+        // try {
+            authValidator(req);
+            let serviceResponse = await authService.SignUp(req);
+            return res.status(201).json(serviceResponse);
+        // } catch (error: any) {
+        //          return response({ message: error?.message || "An error occurred", status: "fail" ,code: 400}, res);
+        // }
     }
-     async SignInController(req: Request, res: Response, next: NextFunction) {
-        try {
-             authValidator(req, res);
-            let serviceResponse = await authService.SignIn(req, res, next);
-            return serviceResponse 
+     async SignInController(req: Request, res:Response) {
+        // try {
+             authValidator(req);
+            let serviceResponse = await authService.SignIn(req);
+            return res.status(200).json(serviceResponse);
 
-        } catch (error: any) {
-                 return response({ message: error?.message || "An error occurred", status: "fail" ,code: 400}, res);
+        // } catch (error: any) {
+        //          return response({ message: error?.message || "An error occurred", status: "fail" ,code: 400}, res);
 
-        }
+        // }
     }
 }
 
