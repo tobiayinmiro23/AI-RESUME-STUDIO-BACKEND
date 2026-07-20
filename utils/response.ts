@@ -2,12 +2,12 @@ import express, { Application, Request, Response, NextFunction } from "express";
 
 type ResponseType = {
     message: string | undefined | object | unknown[];
-    status: string;
+    success: boolean;
     code?: number;
   };
   
     
-export const response=({ message, status ,code}: ResponseType, res:Response)=>{
+export const response=({ message, success ,code}: ResponseType, res:Response)=>{
    
-    res.status(code ?? 200).json({ status, message });
+    res.status(code ?? 200).json({ success, message });
 }
