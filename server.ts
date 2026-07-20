@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { errorHandler } from "./middleware/errorHandler";
 
 
 dotenv.config();
@@ -29,7 +30,7 @@ app.use(router);
 
 
 // app.use(notFoundHandler);
-// app.use(errorHandler);
+app.use(errorHandler);
 
 
 async function startServer() {
