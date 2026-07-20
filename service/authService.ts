@@ -1,7 +1,7 @@
 import { Request } from "express";
 import {UserModel} from "../models/index";
 import bcrypt from "bcrypt";
-import {sign} from "../utils/jwt"
+import {sign} from "../lib/jwt"
 import { AppError } from "../utils/appError";
 import {signInType,signUpType } from "../types/user"
 import authRepository from "../repository/authRepository"
