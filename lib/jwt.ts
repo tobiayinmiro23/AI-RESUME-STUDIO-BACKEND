@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import jwt, {JwtPayload} from "jsonwebtoken";
 import { AppError } from "../utils/appError";
 
@@ -34,14 +36,9 @@ export const sign=(user: userType, options?: jwt.SignOptions): jwtResponseType =
 export const verify=(jwtToken: string) :AuthPayload => {
         try{
              return  jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
-
         }catch(err: unknown){
             if (err instanceof jwt.TokenExpiredError)   throw new AppError("Token has expired",401);
-                // return { message: "", success: false };
             if (err instanceof jwt.JsonWebTokenError) throw new AppError("Invalid token",401);
-                // return { message: "Invalid token", success: false };
-            // if (err instanceof Error) return { message: err.message, success: false };
-            // return { message: "Unable to verify token", success: false };
             throw new AppError("Unable to verify token",401);
         }
 

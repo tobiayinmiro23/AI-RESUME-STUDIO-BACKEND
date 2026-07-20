@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import express from "express";
 import authRoutes from "./authRoutes";
 const router = express.Router()
 
