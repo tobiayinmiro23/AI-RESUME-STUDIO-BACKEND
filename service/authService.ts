@@ -36,7 +36,7 @@ class AuthService {
              let data: signInType ={ message: {
                 email: user.email,
                 id: user._id.toString(),
-                token
+                token: token.message as string
             }, success: true };
             return data;
         // } catch (error) {

@@ -11,7 +11,7 @@ interface userType  {
   email: string;
 }
 type jwtResponseType = {
-    message: string | AuthPayload | object | unknown[];
+    message: string;
     success: boolean;
   };
   
@@ -31,13 +31,9 @@ export const sign=(user: userType, options?: jwt.SignOptions): jwtResponseType =
         return jwtResponse;
 
 };
-export const verify=(jwtToken: string) :jwtResponseType => {
+export const verify=(jwtToken: string) :AuthPayload => {
         try{
-             const decodedToken=  jwt.verify( 
-                jwtToken,
-                JWT_SECRET,
-            ) as AuthPayload;
-        return { message: decodedToken, success: true };
+             return  jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
 
         }catch(err: unknown){
             if (err instanceof jwt.TokenExpiredError)   throw new AppError("Token has expired",401);
