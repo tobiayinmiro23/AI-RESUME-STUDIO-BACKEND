@@ -6,5 +6,8 @@ export const signInSchema = z.object({
 });
 export const otpSchema = z.object({
   email: z.email().trim().toLowerCase(),
-  otp: z.number().min(100000, "Invalid OTP input").max(999999, "Invalid OTP input"),
+  otp: z.string().trim().length(6, "invalid otp input"),
 });
+export const resendOtpSchema = z.object({
+  email: z.email().trim().toLowerCase()
+}).strict();

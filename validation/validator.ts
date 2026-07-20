@@ -1,4 +1,4 @@
-import { otpSchema, signInSchema } from "./schema";
+import { otpSchema, resendOtpSchema, signInSchema } from "./schema";
 
 
 export const signinValidator=(data : unknown)=>{
@@ -10,6 +10,13 @@ export const signinValidator=(data : unknown)=>{
 
 export const otpValidator=(data : unknown)=>{
     const result = otpSchema.safeParse(data);
+    let errMessage= result.error?.issues[0]?.message
+    if (!result.success) return { isValid: false, errMessage };
+    return { isValid: true, errMessage: undefined };
+}
+
+export const resendOtpValidator=(data : unknown)=>{
+    const result = resendOtpSchema.safeParse(data);
     let errMessage= result.error?.issues[0]?.message
     if (!result.success) return { isValid: false, errMessage };
     return { isValid: true, errMessage: undefined };

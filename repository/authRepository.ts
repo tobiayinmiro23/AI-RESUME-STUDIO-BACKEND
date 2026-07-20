@@ -12,16 +12,16 @@ export class AuthRepository {
         return await OtpModel.create({ email, codeHash, expiresAt });
     }
     async updateOtpByEmail(email: string, codeHash: string, expiresAt: Date) {
-        return await OtpModel.updateOne({ email }, { codeHash, expiresAt });
+        return await OtpModel.updateOne({ email }, { codeHash, expiresAt }, { upsert: true });
     }
     async findOtpByEmail(email: string) {
         return await OtpModel.findOne({ email });
     }
-    async deleteOtpByEmail(email: string, session: ClientSession) {
-        return await OtpModel.deleteOne({ email },{ session });
+    async deleteOtpByEmail(email: string) {
+        return await OtpModel.deleteOne({ email });
     }
-    async markUserVerified(email: string, session: ClientSession) {
-        return await UserModel.updateOne({ email }, { verified: true },{ session });
+    async markUserVerified(email: string) {
+        return await UserModel.updateOne({ email }, { verified: true });
     }
 }
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import authService from "../service/authService";
-import { signinValidator, otpValidator } from "../validation/validator";
+import { signinValidator, otpValidator,resendOtpValidator } from "../validation/validator";
 import { AppError } from "../utils/appError";
 
 const AuthValidator=(req:Request)=>{
@@ -10,6 +10,10 @@ const AuthValidator=(req:Request)=>{
     const OtpValidator=(req:Request)=>{
         const {isValid, errMessage} = otpValidator(req.body);
         if (!isValid)  throw new AppError(errMessage || "Invalid OTP input", 400);
+    }
+    const ResendOtpValidator=(req:Request)=>{
+        const {isValid, errMessage} = resendOtpValidator(req.body);
+        if (!isValid)  throw new AppError(errMessage || "Invalid user input", 400);
     }
 class authController {
 
@@ -29,7 +33,7 @@ class authController {
         return res.status(200).json(serviceResponse);
     }
     async ResendOtpController(req: Request, res:Response) {
-        OtpValidator(req);
+        ResendOtpValidator(req);
         let serviceResponse = await authService.ResendOtp(req);
         return res.status(200).json(serviceResponse);
     }

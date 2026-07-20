@@ -15,7 +15,7 @@ class AuthService {
             const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
             await authRepository.createUser(email, hashedPassword);
             // otp
-            const { code , expiresAt } = generateOtpWithExpiry(email);
+            const { code , expiresAt } = generateOtpWithExpiry();
              console.log("Generated OTP:", code); // Log the generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
             await authRepository.createOtp(email, codeHash, expiresAt);
@@ -46,13 +46,13 @@ class AuthService {
         const isMatch = await bcrypt.compare(otp, otpRecord.codeHash);
         if (!isMatch) throw new AppError("Invalid OTP", 400);
     
-        const session = await mongoose.startSession();
-        try {
-            await session.withTransaction(async () => {
-            await authRepository.markUserVerified(email, session);
-            await authRepository.deleteOtpByEmail(email, session);
-            });
-        } finally { session.endSession(); }
+        // const session = await mongoose.startSession();
+        // try {
+        //     await session.withTransaction(async () => {
+            await authRepository.markUserVerified(email);
+            await authRepository.deleteOtpByEmail(email);
+        //     });
+        // } finally { session.endSession(); }
         return { message: "OTP verified successfully", success: true };
 
     }
@@ -61,7 +61,8 @@ class AuthService {
         const user = await authRepository.findUserByEmail(email);
         if (!user) throw new AppError("User not found", 404);
         if (user.verified) throw new AppError("User is already verified", 400);
-        const { code , expiresAt } = generateOtpWithExpiry(email);
+        const { code , expiresAt } = generateOtpWithExpiry();
+        console.log("Generated OTP:", code); // Log the generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
         return { message: "OTP sent successfully", success: true };
