@@ -7,7 +7,6 @@ export const generateOtp = (length = 6): string => {
   for (let i = 0; i < length; i++) {
     const randomIndex = crypto.randomInt(0, digits.length);
     otp += digits[randomIndex];
-    console.log(`Generated digit ${i + 1}: ${digits[randomIndex]}`); // Log each generated digit
   }
   return otp;
 };

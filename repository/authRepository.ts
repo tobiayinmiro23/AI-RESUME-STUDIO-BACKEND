@@ -1,4 +1,3 @@
-import { ClientSession } from "mongoose";
 import {OtpModel, UserModel} from "../models/auth";
 
 export class AuthRepository {

@@ -5,7 +5,6 @@ import { AppError } from "../utils/appError";
 import {signInType,signUpType } from "../types/user"
 import authRepository from "../repository/authRepository"
 import { generateOtpWithExpiry } from "../utils/otp";
-import mongoose from "mongoose";
 
 class AuthService {
     async SignUp(req: Request ): Promise<signUpType> {
