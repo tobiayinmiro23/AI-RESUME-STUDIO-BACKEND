@@ -40,14 +40,10 @@ class AuthService {
     async ResetPassword(req: Request): Promise<signUpType> {
         const { email, password } = req.body;
         const user = await authRepository.findUserByEmail(email);
-        const otpEmail = await authRepository.findOtpByEmail(email);
-
         if (!user) throw new AppError("Email not found", 404);
-        if (!otpEmail) throw new AppError("Unable to reset password", 404);
         const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updatePasswordByEmail(email, hashedPassword);
-        await authRepository.deleteOtpByEmail(email);
-        return { message: "Password reset successfully", success: true };
+        return { message: "Password reset successful", success: true };
     }
     async VerifyOtp(req: Request): Promise<signUpType> {
         const { email, otp, reason } = req.body;
@@ -63,10 +59,11 @@ class AuthService {
         //     await session.withTransaction(async () => {
         if (reason === "signup") {
             await authRepository.markUserVerified(email);
-            await authRepository.deleteOtpByEmail(email);
         } else if (reason === "reset-password") {
+            await authRepository.deleteOtpByEmail(email);
             return { message: "password reset approved", success: true };
         }
+        await authRepository.deleteOtpByEmail(email);
         return { message: "OTP verified successfully", success: true };
 
     }
