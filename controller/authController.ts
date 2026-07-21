@@ -37,6 +37,11 @@ class authController {
         let serviceResponse = await authService.ResendOtp(req);
         return res.status(200).json(serviceResponse);
     }
+    async ResetPasswordController(req: Request, res:Response) {
+        AuthValidator(req);
+        let serviceResponse = await authService.ResetPassword(req);
+        return res.status(200).json(serviceResponse);
+    }
 }
 
 export default new authController();

@@ -6,7 +6,7 @@ export const apiLimiter = rateLimit({
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: {
-    status: "fail",
+    success: false,
     message: "Too many requests. Please try again later.",
   },
 });
@@ -14,7 +14,7 @@ export const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 5,
   message: {
-    status: "fail",
+    success: false,
     message: "Too many login attempts. Try again later.",
   },
 });
@@ -22,7 +22,7 @@ export const otpLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   limit: 4,
   message: {
-    status: "fail",
+    success: false,
     message: "Too many OTP requests. Try again later.",
   },
 });

@@ -37,8 +37,16 @@ class AuthService {
             }, success: true };
             return data;
     }
+    async ResetPassword(req: Request): Promise<signUpType> {
+        const { email, password } = req.body;
+        const user = await authRepository.findUserByEmail(email);
+        if (!user) throw new AppError("Email not found", 404);
+        const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
+        await authRepository.createUser(email, hashedPassword);
+        return { message: "Password reset successfully", success: true };
+    }
     async VerifyOtp(req: Request): Promise<signUpType> {
-        const { email, otp } = req.body;
+        const { email, otp, reason,password } = req.body;
         const otpRecord = await authRepository.findOtpByEmail(email);
         if (!otpRecord) throw new AppError("OTP not found", 404);
         if (new Date() > otpRecord.expiresAt) throw new AppError("OTP has expired", 400);
@@ -48,22 +56,33 @@ class AuthService {
         // const session = await mongoose.startSession();
         // try {
         //     await session.withTransaction(async () => {
+        if (reason === "signup") {
             await authRepository.markUserVerified(email);
             await authRepository.deleteOtpByEmail(email);
+        } else if (reason === "reset-password") {
+            const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
+            await authRepository.updatePasswordByEmail(email, hashedPassword);
+            await authRepository.deleteOtpByEmail(email);
+        }
         //     });
         // } finally { session.endSession(); }
         return { message: "OTP verified successfully", success: true };
 
     }
     async ResendOtp(req: Request): Promise<signUpType> {
-        const { email } = req.body;
+        const { email, reason } = req.body;
         const user = await authRepository.findUserByEmail(email);
         if (!user) throw new AppError("User not found", 404);
-        if (user.verified) throw new AppError("User is already verified", 400);
+        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
+        if (reason === "signup" && user.verified) throw new AppError("User is already verified", 400);
         const { code , expiresAt } = generateOtpWithExpiry();
         console.log("Generated OTP:", code); // Log the generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
-        await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
+        if (reason === "signup") {
+            await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
+        } else if (reason === "reset-password") {
+            await authRepository.createOtp(email, codeHash, expiresAt);
+        }
         return { message: "OTP sent successfully", success: true };
     }
 }
