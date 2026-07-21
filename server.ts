@@ -1,10 +1,12 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import express, { Application, Request, Response } from "express";
 import router from "./route/index";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/errorHandler";
+import { apiLimiter } from "./middleware/rateLimiter";
+
 
 
 dotenv.config();
@@ -17,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL || "*", credentials: true }));
 app.use(express.json({}));
+app.use(apiLimiter);
 
 
 // ---------- Health Check ----------
