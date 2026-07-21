@@ -25,7 +25,7 @@ const userSchema = new Schema(
 );
 const otpSchema = new Schema(
   {
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     codeHash: { type: String, required: true },
     expiresAt: { type: Date, required: true }
   },

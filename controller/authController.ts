@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import authService from "../service/authService";
 import { signinValidator, otpValidator,resendOtpValidator } from "../validation/validator";
 import { AppError } from "../utils/appError";

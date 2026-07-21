@@ -48,7 +48,7 @@ class AuthService {
     async VerifyOtp(req: Request): Promise<signUpType> {
         const { email, otp, reason } = req.body;
         const otpRecord = await authRepository.findOtpByEmail(email);
-        if (!otpRecord) throw new AppError("OTP not found", 404);
+        if (!otpRecord) throw new AppError("User does not exist", 404);
         if (new Date() > otpRecord.expiresAt) throw new AppError("OTP has expired", 400);
         const isMatch = await bcrypt.compare(otp, otpRecord.codeHash);
         if (!isMatch) throw new AppError("Invalid OTP", 400);
@@ -76,11 +76,8 @@ class AuthService {
         const { code , expiresAt } = generateOtpWithExpiry();
         console.log("Generated OTP:", code); // Log the generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
-        if (reason === "signup") {
-            await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
-        } else if (reason === "reset-password") {
-            await authRepository.createOtp(email, codeHash, expiresAt);
-        }
+        if (reason === "signup") await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
+        else if (reason === "reset-password") await authRepository.createOtp(email, codeHash, expiresAt);
         return { message: "OTP sent successfully", success: true };
     }
 }

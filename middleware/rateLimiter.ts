@@ -12,7 +12,7 @@ export const apiLimiter = rateLimit({
 });
 export const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 5,
+  limit: 15,
   message: {
     success: false,
     message: "Too many login attempts. Try again later.",
@@ -20,7 +20,7 @@ export const loginLimiter = rateLimit({
 });
 export const otpLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,
-  limit: 4,
+  limit: 14,
   message: {
     success: false,
     message: "Too many OTP requests. Try again later.",
