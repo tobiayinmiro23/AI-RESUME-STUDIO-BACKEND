@@ -40,19 +40,24 @@ class AuthService {
     async ResetPassword(req: Request): Promise<signUpType> {
         const { email, password } = req.body;
         const user = await authRepository.findUserByEmail(email);
+        const otpEmail = await authRepository.findOtpByEmail(email);
+
         if (!user) throw new AppError("Email not found", 404);
+        if (!otpEmail) throw new AppError("Unable to reset password", 404);
         const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
-        await authRepository.createUser(email, hashedPassword);
+        await authRepository.updatePasswordByEmail(email, hashedPassword);
+        await authRepository.deleteOtpByEmail(email);
         return { message: "Password reset successfully", success: true };
     }
     async VerifyOtp(req: Request): Promise<signUpType> {
-        const { email, otp, reason,password } = req.body;
+        const { email, otp, reason } = req.body;
         const otpRecord = await authRepository.findOtpByEmail(email);
         if (!otpRecord) throw new AppError("OTP not found", 404);
         if (new Date() > otpRecord.expiresAt) throw new AppError("OTP has expired", 400);
         const isMatch = await bcrypt.compare(otp, otpRecord.codeHash);
         if (!isMatch) throw new AppError("Invalid OTP", 400);
-    
+        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
+        
         // const session = await mongoose.startSession();
         // try {
         //     await session.withTransaction(async () => {
@@ -60,12 +65,8 @@ class AuthService {
             await authRepository.markUserVerified(email);
             await authRepository.deleteOtpByEmail(email);
         } else if (reason === "reset-password") {
-            const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
-            await authRepository.updatePasswordByEmail(email, hashedPassword);
-            await authRepository.deleteOtpByEmail(email);
+            return { message: "password reset approved", success: true };
         }
-        //     });
-        // } finally { session.endSession(); }
         return { message: "OTP verified successfully", success: true };
 
     }
