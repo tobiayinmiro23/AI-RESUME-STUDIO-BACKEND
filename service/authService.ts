@@ -15,7 +15,7 @@ class AuthService {
             await authRepository.createUser(email, hashedPassword);
             // otp
             const { code , expiresAt } = generateOtpWithExpiry();
-             console.log("Generated OTP:", code); // Log the generated OTP for debugging
+             console.log("Generated OTP:", code); // generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
             await authRepository.createOtp(email, codeHash, expiresAt);
 
@@ -74,7 +74,7 @@ class AuthService {
         if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         if (reason === "signup" && user.verified) throw new AppError("User is already verified", 400);
         const { code , expiresAt } = generateOtpWithExpiry();
-        console.log("Generated OTP:", code); // Log the generated OTP for debugging
+        console.log("Generated OTP:", code); // generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
         if (reason === "signup") await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
         else if (reason === "reset-password") await authRepository.createOtp(email, codeHash, expiresAt);

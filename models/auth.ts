@@ -29,7 +29,7 @@ const otpSchema = new Schema(
     codeHash: { type: String, required: true },
     expiresAt: { type: Date, required: true }
   },
-  { timestamps: true } // gives you createdAt/updatedAt for free, informational only
+  { timestamps: true }
 );
 
 export type User = InferSchemaType<typeof userSchema>;
