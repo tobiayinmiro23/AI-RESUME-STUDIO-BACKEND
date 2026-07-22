@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import { errorHandler } from "./middleware/errorHandler";
 import { apiLimiter } from "./middleware/rateLimiter";
 import { notFound } from "./middleware/notFound";
+import { shutdown, unhandledError } from "./config/server";
+import { error } from "console";
 
 
 
@@ -14,7 +16,7 @@ dotenv.config();
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
-// const MONGO_URI = process.env.DB_URL;
+const DB_URL = process.env.DB_URL;
 
 // ---------- Global Middleware ----------
 app.use(helmet());
@@ -36,10 +38,9 @@ app.use(errorHandler);
 
 async function startServer() {
   try {
-    await mongoose.connect(process.env.DB_URL || " ");
+    if (!DB_URL) throw new Error("DATABASE_URL is not defined");
+    await mongoose.connect(DB_URL);
     console.log("[db] MongoDB connected");
-    
-
     app.listen(PORT, () => {
       console.log(`[server] Listening on port ${PORT} (${process.env.NODE_ENV || "development"})`);
     });
@@ -50,11 +51,10 @@ async function startServer() {
 }
 
 // Graceful shutdown
-process.on("SIGINT", async () => {
-  await mongoose.disconnect();
-  console.log("[db] MongoDB disconnected on app termination");
-  process.exit(0);
-});
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("uncaughtException",(error) => unhandledError(error));
+process.on("uncaughtException",(reason) => unhandledError(reason));
 
 startServer();
 
