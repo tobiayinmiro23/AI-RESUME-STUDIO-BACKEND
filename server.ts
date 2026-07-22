@@ -51,7 +51,7 @@ async function startServer() {
 
 // Graceful shutdown
 process.on("SIGINT", async () => {
-//   await mongoose.disconnect();
+  await mongoose.disconnect();
   console.log("[db] MongoDB disconnected on app termination");
   process.exit(0);
 });
