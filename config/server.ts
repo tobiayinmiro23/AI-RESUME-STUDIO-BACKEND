@@ -4,7 +4,6 @@ export const shutdown = async (signal: string) => {
   console.log(`[server] ${signal} received. Shutting down...`);
   await mongoose.disconnect();
   console.log("[db] MongoDB disconnected");
-
   process.exit(0);
 };
 
