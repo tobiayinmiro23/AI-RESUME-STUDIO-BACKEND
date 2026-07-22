@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/errorHandler";
 import { apiLimiter } from "./middleware/rateLimiter";
+import { notFound } from "./middleware/notFound";
 
 
 
@@ -29,7 +30,7 @@ app.get("/health", (_req: Request, res: Response) => {
  
 // ---------- Routes ----------
 app.use(router);
-  
+app.use(notFound);
 
 
 // app.use(notFoundHandler);
