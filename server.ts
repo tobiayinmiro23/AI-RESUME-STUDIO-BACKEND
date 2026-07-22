@@ -31,9 +31,6 @@ app.get("/health", (_req: Request, res: Response) => {
 // ---------- Routes ----------
 app.use(router);
 app.use(notFound);
-
-
-// app.use(notFoundHandler);
 app.use(errorHandler);
 
 

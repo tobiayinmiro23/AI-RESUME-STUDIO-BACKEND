@@ -69,6 +69,7 @@ class AuthService {
     }
     async ResendOtp(req: Request): Promise<signUpType> {
         const { email, reason } = req.body;
+        console.log(req.headers);
         const user = await authRepository.findUserByEmail(email);
         if (!user) throw new AppError("User not found", 404);
         if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
