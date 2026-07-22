@@ -40,6 +40,7 @@ class AuthService {
     async ResetPassword(req: Request): Promise<signUpType> {
         const { email, password } = req.body;
         const user = await authRepository.findUserByEmail(email);
+        if (user?.id !== req.userId) throw new AppError("Unauthorized request", 401);
         if (!user) throw new AppError("Email not found", 404);
         const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updatePasswordByEmail(email, hashedPassword);
