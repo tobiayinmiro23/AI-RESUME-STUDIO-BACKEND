@@ -35,8 +35,10 @@ export const sign=(user: userType, options?: jwt.SignOptions): jwtResponseType =
 };
 export const verify=(jwtToken: string) :AuthPayload => {
         try{
-             return  jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
+             let jwtResult=  jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
+             return jwtResult;
         }catch(err: unknown){
+          // console.log("JWT verification error:", err);
             if (err instanceof jwt.TokenExpiredError)   throw new AppError("Token has expired",401);
             if (err instanceof jwt.JsonWebTokenError) throw new AppError("Invalid token",401);
             throw new AppError("Unable to verify token",401);
