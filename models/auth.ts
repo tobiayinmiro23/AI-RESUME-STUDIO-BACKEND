@@ -19,9 +19,7 @@ const userSchema = new Schema(
       default: false,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 const otpSchema = new Schema(
   {

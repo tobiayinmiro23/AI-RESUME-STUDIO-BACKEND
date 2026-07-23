@@ -1,8 +1,8 @@
-import { Request, NextFunction } from "express";
+import { Request, NextFunction,Response } from "express";
 import { AppError } from "../utils/appError";
 import {verify} from "../lib/jwt";
 
-export const authMiddleware = (req: Request,next: NextFunction) => {
+export const authMiddleware = (req: Request,res: Response,next: NextFunction) => {
         const authHeader = req.headers.authorization;
         if (!authHeader?.startsWith("Bearer ")) throw new AppError("Unauthorized request",401);
         const authPayload = authHeader.trim().split(" ");
