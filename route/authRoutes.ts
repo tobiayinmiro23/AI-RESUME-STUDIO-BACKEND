@@ -7,7 +7,7 @@ import { authMiddleware } from "../middleware/authorization";
 
 authRoutes.post('/signup', authController.SignUpController)
 authRoutes.post('/signin', loginLimiter, authController.SignInController)
-authRoutes.post('/reset-password',authMiddleware ,loginLimiter, authController.ResetPasswordController)
+authRoutes.post('/reset-password', authMiddleware ,loginLimiter, authController.ResetPasswordController)
 authRoutes.post('/verify-otp', otpLimiter, authController.VerifyOtpController)
 authRoutes.post('/resend-otp', otpLimiter, authMiddleware, authController.ResendOtpController)
 
