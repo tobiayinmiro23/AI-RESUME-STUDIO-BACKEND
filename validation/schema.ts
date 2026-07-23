@@ -12,7 +12,7 @@ export const resetPasswordSchema = z.object({
 
 export const verifyOtpSchema = z.object({
   email: z.email().trim().toLowerCase(),
-  otp: z.string().length(6, "OTP must be exactly 6 digits long"),
+  otp: z.string().length(6, "invalid otp input"),
   reason: z.enum(["signup", "reset-password"], { message: "Required fields are missing" }),
 }).strict();
 

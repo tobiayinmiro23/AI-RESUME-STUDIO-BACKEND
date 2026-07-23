@@ -29,14 +29,11 @@ export const sign=(user: userType, options?: jwt.SignOptions): jwtResponseType =
             JWT_SECRET,
             { expiresIn: options?.expiresIn || "7d" }
         )
-        let jwtResponse={ message: token, success: true };
-        return jwtResponse;
-
+        return { message: token, success: true };
 };
 export const verify=(jwtToken: string) :AuthPayload => {
         try{
-             let jwtResult=  jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
-             return jwtResult;
+             return jwt.verify( jwtToken,JWT_SECRET,) as AuthPayload;
         }catch(err: unknown){
             if (err instanceof jwt.TokenExpiredError)   throw new AppError("Token has expired",401);
             if (err instanceof jwt.JsonWebTokenError) throw new AppError("Invalid token",401);
