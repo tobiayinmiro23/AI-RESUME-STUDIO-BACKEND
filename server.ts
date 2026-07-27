@@ -8,7 +8,6 @@ import { errorHandler } from "./middleware/errorHandler";
 import { apiLimiter } from "./middleware/rateLimiter";
 import { notFound } from "./middleware/notFound";
 import { shutdown, unhandledError } from "./config/server";
-import { error } from "console";
 
 
 
