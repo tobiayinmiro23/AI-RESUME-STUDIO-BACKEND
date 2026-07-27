@@ -22,7 +22,5 @@ export const upload = multer({
       return cb( new Error("Only PDF and DOCX files are allowed"));
     }
     cb(null, true);
-
   },
-
 });
