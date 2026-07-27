@@ -1,8 +1,9 @@
 import express from "express";
-import authController from "../controller/authController";
+import resumeController from "../controller/resumeController";
+import { uploadMiddleware } from "../middleware/fileUpload";
 const resumeRoutes = express.Router()
 
 
-resumeRoutes.post('/signup', authController.SignUpController)
+resumeRoutes.post('/upload',uploadMiddleware.single('resume'), resumeController.UploadController)
 
 export default resumeRoutes;
