@@ -13,8 +13,12 @@ class resumeController {
 
     async UploadController(req: Request, res:Response) {
             ResumeFileValidator(req);
-            let serviceResponse = await authService.SignUp(req);
-            return res.status(201).json(serviceResponse);
+            // let serviceResponse = await authService.SignUp(req);
+            // return res.status(201).json(serviceResponse);
+            return res.status(200).json({
+                success: true,
+                message: "file successfully uploaded",
+            });
     }
      
 }
