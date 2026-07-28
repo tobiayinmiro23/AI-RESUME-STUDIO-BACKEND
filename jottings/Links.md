@@ -1,3 +1,3 @@
-link to tio tap ui component
+link to tip tap ui component
 
 https://tiptap.dev/docs/ui-components/components/overview?utm_source=chatgpt.com
