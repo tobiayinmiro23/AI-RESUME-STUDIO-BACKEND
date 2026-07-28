@@ -17,7 +17,7 @@ class resumeController {
             // return res.status(201).json(serviceResponse);
             return res.status(200).json({
                 success: true,
-                message: "file successfully uploaded",
+                message: "file uploaded successfully",
             });
     }
      
