@@ -109,14 +109,14 @@ export const getResumeDetail = async()=>{
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'google/gemma-3-27b-it',
+          model: 'openrouter/auto-beta',
           messages: [
             {
               role: 'user',
               content: [
                 {
                   type: 'text',
-                  text: 'give a brief overview/ summary of this pdf, the summary must no be more than 9 lines',
+                  text:"Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines",
                 },
                 {
                   type: 'file',
@@ -140,7 +140,7 @@ export const getResumeDetail = async()=>{
           ],
         }),
       });
-
+      // console.log(response)
   if(!response.ok){
       return {
         success:false,
