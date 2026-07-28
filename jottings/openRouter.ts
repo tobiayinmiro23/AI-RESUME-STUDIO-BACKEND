@@ -68,14 +68,16 @@ export const promptTest = async()=>{
         ],
       }),
     })
-    console.log(response)
     if(!response.ok){
       return {
         success:false,
         message:"an error occured"
       }
   }
-  return response
+      const data = await response.json();
+
+
+    return data;
   } catch (error:any) {
     return {
         success:false,

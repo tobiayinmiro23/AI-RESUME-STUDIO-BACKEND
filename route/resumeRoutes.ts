@@ -9,6 +9,7 @@ resumeRoutes.post('/upload',uploadMiddleware.single('resume'), resumeController.
 resumeRoutes.post('/extract-data',async(req:Request,res:Response)=>{
     console.log(req.body)
     let response = await promptTest()
+    console.log(response)
     res.status(200).json(response)
 })
 
