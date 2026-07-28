@@ -100,43 +100,43 @@ const base64PDF = await encodePDFToBase64(pdfPath);
 
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    model: 'google/gemma-3-27b-it',
-    messages: [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: 'What are the main points in this document?',
-          },
-          {
-            type: 'file',
-            file: {
-              filename: 'document.pdf',
-              file_data: base64PDF,
-            },
-          },
-        ],
-      },
-    ],
-    // Optional: Configure PDF processing engine
-    // PDF parsing will still work even if the plugin is not explicitly set
-    plugins: [
-      {
-        id: 'file-parser',
-        pdf: {
-          engine: 'cloudflare-ai', // defaults to "mistral-ocr". See Pricing above
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          'Content-Type': 'application/json',
         },
-      },
-    ],
-  }),
-});
+        body: JSON.stringify({
+          model: 'google/gemma-3-27b-it',
+          messages: [
+            {
+              role: 'user',
+              content: [
+                {
+                  type: 'text',
+                  text: 'What are the main points in this document?',
+                },
+                {
+                  type: 'file',
+                  file: {
+                    filename: '1785230040147-Ayinmiro Tobi B E.pdf',
+                    file_data: base64PDF,
+                  },
+                },
+              ],
+            },
+          ],
+          // Optional: Configure PDF processing engine
+          // PDF parsing will still work even if the plugin is not explicitly set
+          plugins: [
+            {
+              id: 'file-parser',
+              pdf: {
+                engine: 'cloudflare-ai', // defaults to "mistral-ocr". See Pricing above
+              },
+            },
+          ],
+        }),
+      });
 
   if(!response.ok){
       return {
