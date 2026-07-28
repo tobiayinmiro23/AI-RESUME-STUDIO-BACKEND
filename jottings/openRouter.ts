@@ -59,7 +59,7 @@ export const promptTest = async()=>{
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'openai/gpt-4o',
+        model: 'openai/gpt-oss-20b:free',
         messages: [
           {
             role: 'user',
@@ -68,6 +68,7 @@ export const promptTest = async()=>{
         ],
       }),
     })
+    console.log(response)
     if(!response.ok){
       return {
         success:false,
