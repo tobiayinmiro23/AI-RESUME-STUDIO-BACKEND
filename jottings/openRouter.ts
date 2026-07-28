@@ -1,5 +1,7 @@
 import fs from "fs"
 import dotenv from "dotenv";
+import path from 'path';
+
 dotenv.config();
 
 // fetch request example
@@ -95,8 +97,9 @@ export const getResumeDetail = async()=>{
 }
 
 // Read and encode the PDF
-const pdfPath = '../uploads/1785230040147-Ayinmiro Tobi B E.pdf';
-const base64PDF = await encodePDFToBase64(pdfPath);
+
+  const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
+  const base64PDF = await encodePDFToBase64(pdfPath);
 
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -113,7 +116,7 @@ const base64PDF = await encodePDFToBase64(pdfPath);
               content: [
                 {
                   type: 'text',
-                  text: 'What are the main points in this document?',
+                  text: 'give a brief overview/ summary of this pdf, the summary must no be more than 9 lines',
                 },
                 {
                   type: 'file',
