@@ -11,16 +11,16 @@ export const apiLimiter = rateLimit({
   },
 });
 export const loginLimiter = rateLimit({
-  windowMs: Number(process.env.LOGIN_TIME_WINDOW) * 60 * 1000,
-  limit: Number(process.env.LOGIN_REQUEST_LIMIT),
+  windowMs: Number(process.env.LOGINLIMITER_TIME_WINDOW) * 60 * 1000,
+  limit: Number(process.env.LOGINLIMITER_REQUEST_LIMIT),
   message: {
     success: false,
     message: "Too many login attempts. Try again later.",
   },
 });
 export const otpLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  limit: 14,
+  windowMs: Number(process.env.OTPLIMITER_TIME_WINDOW) * 60 * 1000,
+  limit: Number(process.env.OTPLIMITER_REQUEST_LIMIT),
   message: {
     success: false,
     message: "Too many OTP requests. Try again later.",
