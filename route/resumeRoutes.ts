@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import resumeController from "../controller/resumeController";
 import { uploadMiddleware } from "../middleware/fileUpload";
-import { getResumeDetail, promptTest } from "../jottings/openRouter";
+import { getResumeDetail } from "../jottings/openRouter";
 const resumeRoutes = express.Router()
 
 
