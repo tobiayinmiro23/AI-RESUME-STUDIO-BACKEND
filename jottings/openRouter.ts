@@ -90,7 +90,15 @@ export const promptTest = async()=>{
       }
   }
 }
-
+async function getPdfContents(pdfPath: string): Promise<TextResult> {
+  const buffer = await fs.readFile(pdfPath);
+  const parser = new PDFParse({
+    data: buffer,
+  });
+  const result = await parser.getText();
+  await parser.destroy();
+  return result
+}
 export const getResumeDetail = async()=>{
     async function encodePDFToBase64(pdfPath: string): Promise<string> {
       const pdfBuffer = await fs.readFile(pdfPath);
@@ -169,17 +177,5 @@ export const getResumeDetail = async()=>{
 
 //   console.log(result.text);
 // }
-async function getPdfContents(pdfPath: string): Promise<TextResult> {
-  // Read the PDF into a Buffer
-  const buffer = await fs.readFile(pdfPath);
-  // Create the parser
-  const parser = new PDFParse({
-    data: buffer,
-  });
-  // Extract text
-  const result = await parser.getText();
-  // Clean up
-  await parser.destroy();
-  return result
-}
+
 
