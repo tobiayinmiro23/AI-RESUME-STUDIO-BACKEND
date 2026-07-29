@@ -91,16 +91,16 @@ export const promptTest = async()=>{
 
 export const getResumeDetail = async()=>{
     async function encodePDFToBase64(pdfPath: string): Promise<string> {
-  const pdfBuffer = await fs.promises.readFile(pdfPath);
-  const base64PDF = pdfBuffer.toString('base64');
-  return `data:application/pdf;base64,${base64PDF}`;
-}
+      const pdfBuffer = await fs.promises.readFile(pdfPath);
+      const base64PDF = pdfBuffer.toString('base64');
+      return `data:application/pdf;base64,${base64PDF}`;
+    }
 
 // Read and encode the PDF
 
   const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
   const base64PDF = await encodePDFToBase64(pdfPath);
-
+  console.log(base64PDF)
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -109,7 +109,8 @@ export const getResumeDetail = async()=>{
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'openrouter/auto-beta', 
+          // model: 'openrouter/auto-beta', 
+          model: 'inclusionai/ling-3.0-flash:free', 
           messages: [
             {
               role: 'user',
@@ -140,6 +141,7 @@ export const getResumeDetail = async()=>{
           ],
         }),
       });
+      console.log(response)
     if(!response.ok){
       return {
         success:false,
@@ -147,10 +149,10 @@ export const getResumeDetail = async()=>{
       }
   }
       const data = await response.json();
-      console.log(data)
     return data;
 
   } catch (error:any) {
+    console.log(error)
     return {
         success:false,
         message:error.message || "an error occured"
