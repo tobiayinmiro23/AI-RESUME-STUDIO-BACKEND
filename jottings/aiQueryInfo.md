@@ -31,3 +31,14 @@ Matching percentage
 Customized summary
 Customized experience bullets
 Customized skills section
+
+3. AI Resume Rewrite
+One click:
+Rewrite my resume
+
+The AI:
+improves wording
+fixes grammar
+improves ATS
+keeps facts accurate
+outputs an editable version
