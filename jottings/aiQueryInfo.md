@@ -13,3 +13,5 @@ Resume length analysis
 Contact information validation
 Grammar and spelling analysis
 Professional tone score
+Technologies detected
+Suggested keywords for ATS
