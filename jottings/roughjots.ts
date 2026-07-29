@@ -154,6 +154,9 @@ export const promptTest = async()=>{
 //       }
 //   }
 // }
+
+
+//  this endpoint is not free
 export const getResumeDetailsWithUrl = async()=>{
    try {
              const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
