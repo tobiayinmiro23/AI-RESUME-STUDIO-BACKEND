@@ -154,3 +154,45 @@ export const promptTest = async()=>{
 //       }
 //   }
 // }
+const getResumeDetailsWithUrl = async()=>{
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    model: 'anthropic/claude-sonnet-4',
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: 'What are the main points in this document?',
+          },
+          {
+            type: 'file',
+            file: {
+              filename: 'document.pdf',
+              file_data: 'https://bitcoin.org/bitcoin.pdf',
+            },
+          },
+        ],
+      },
+    ],
+    // Optional: Configure PDF processing engine
+    plugins: [
+      {
+        id: 'file-parser',
+        pdf: {
+          engine: 'mistral-ocr',
+        },
+      },
+    ],
+  }),
+});
+
+const data = await response.json();
+console.log(data);
+}
