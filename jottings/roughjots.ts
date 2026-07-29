@@ -183,16 +183,18 @@ export const getResumeDetailsWithUrl = async()=>{
       },
     ],
     // Optional: Configure PDF processing engine
-    plugins: [
-      {
-        id: 'file-parser',
-        pdf: {
-          engine: 'mistral-ocr',
-        },
-      },
-    ],
+    // plugins: [
+    //   {
+    //     id: 'file-parser',
+    //     pdf: {
+    //       engine: 'mistral-ocr',
+    //     },
+    //   },
+    // ],
   }),
 });
+    console.log(response)
+
 if(!response.ok){
       return {
         success:false,
