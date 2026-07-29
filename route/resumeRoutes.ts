@@ -2,22 +2,16 @@ import express, { Request, Response } from "express";
 import resumeController from "../controller/resumeController";
 import { uploadMiddleware } from "../middleware/fileUpload";
 import { getResumeDetail } from "../jottings/openRouter";
+import { getResumeDetailsWithUrl } from "../jottings/roughjots";
 const resumeRoutes = express.Router()
 
 
 resumeRoutes.post('/upload',uploadMiddleware.single('resume'), resumeController.UploadController)
 resumeRoutes.post('/extract-data',async(req:Request,res:Response)=>{
     console.log(req.body)
-    let response = await getResumeDetail()
+    // let response = await getResumeDetail()
+    let response = await getResumeDetailsWithUrl()
     // console.log(response)
-    console.dir(response, { depth: null });
-    console.log(
-  JSON.stringify(
-    response.choices[0].message.annotations,
-    null,
-    2
-  )
-);
     res.status(200).json(response)
 })
 

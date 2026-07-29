@@ -154,8 +154,9 @@ export const promptTest = async()=>{
 //       }
 //   }
 // }
-const getResumeDetailsWithUrl = async()=>{
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+export const getResumeDetailsWithUrl = async()=>{
+   try {
+             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
   method: 'POST',
   headers: {
     Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -169,13 +170,13 @@ const getResumeDetailsWithUrl = async()=>{
         content: [
           {
             type: 'text',
-            text: 'What are the main points in this document?',
+            text: 'give a 5 line summary of this pdf file',
           },
           {
             type: 'file',
             file: {
-              filename: 'document.pdf',
-              file_data: 'https://bitcoin.org/bitcoin.pdf',
+              filename: '1785230040147-Ayinmiro Tobi B E.pdf',
+              file_data: 'https://raw.githubusercontent.com/tobiayinmiro23/AI-RESUME-STUDIO-BACKEND/main/uploads/1785230040147-Ayinmiro%20Tobi%20B%20E.pdf',
             },
           },
         ],
@@ -192,7 +193,20 @@ const getResumeDetailsWithUrl = async()=>{
     ],
   }),
 });
+if(!response.ok){
+      return {
+        success:false,
+        message:"an error occured"
+      }
+  }
+      const data = await response.json();
+    return data;
 
-const data = await response.json();
-console.log(data);
+   } catch (error:any) {
+    console.log(error)
+    return {
+        success:false,
+        message:error.message || "an error occured"
+      }
+   }
 }
