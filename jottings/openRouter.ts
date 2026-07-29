@@ -169,13 +169,4 @@ export const getResumeDetail = async()=>{
   }
 }
 
-// async function test() {
-//   const buffer = fs.readFileSync(
-//     "./uploads/1785230040147-Ayinmiro Tobi B E.pdf"
-//   );
-//   const result = await pdf(buffer);
-
-//   console.log(result.text);
-// }
-
 
