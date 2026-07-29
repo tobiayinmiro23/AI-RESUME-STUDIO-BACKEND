@@ -42,3 +42,14 @@ fixes grammar
 improves ATS
 keeps facts accurate
 outputs an editable version
+
+4. Multiple Resume Templates
+
+After the AI builds the resume:
+Modern
+Professional
+Minimal
+Creative
+Executive
+
+Same content, different layouts.
