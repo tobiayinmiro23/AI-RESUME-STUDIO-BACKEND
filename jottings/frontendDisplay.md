@@ -8,3 +8,9 @@ The downside is that LLMs can occasionally produce invalid Tiptap JSON, so you'l
 
 Option 3 (My recommendation): AI returns HTML
 This is what many AI editors do.
+
+My final ranking for your specific architecture
+Semantic HTML + Tiptap ⭐⭐⭐⭐⭐ (best fit)
+Structured Resume JSON + converter ⭐⭐⭐⭐☆
+Markdown → HTML → Tiptap ⭐⭐⭐☆☆
+Tiptap JSON directly from the LLM ⭐⭐☆☆☆
