@@ -162,8 +162,8 @@ export const getResumeDetailsWithUrl = async()=>{
     Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({
-    model: 'anthropic/claude-sonnet-4',
+    body: JSON.stringify({
+    model: 'inclusionai/ling-3.0-flash:free', 
     messages: [
       {
         role: 'user',
