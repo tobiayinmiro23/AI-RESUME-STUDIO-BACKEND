@@ -109,7 +109,7 @@ export const getResumeDetail = async()=>{
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'openrouter/auto-beta',
+          model: 'openrouter/auto-beta', 
           messages: [
             {
               role: 'user',
@@ -140,14 +140,14 @@ export const getResumeDetail = async()=>{
           ],
         }),
       });
-      // console.log(response)
-  if(!response.ok){
+    if(!response.ok){
       return {
         success:false,
         message:"an error occured"
       }
   }
       const data = await response.json();
+      console.log(data)
     return data;
 
   } catch (error:any) {
