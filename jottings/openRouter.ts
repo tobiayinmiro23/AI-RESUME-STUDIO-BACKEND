@@ -100,11 +100,11 @@ async function getPdfContents(pdfPath: string): Promise<TextResult> {
   return result
 }
 export const getResumeDetail = async()=>{
-    async function encodePDFToBase64(pdfPath: string): Promise<string> {
-      const pdfBuffer = await fs.readFile(pdfPath);
-      const base64PDF = pdfBuffer.toString('base64');
-      return `data:application/pdf;base64,${base64PDF}`;
-    }
+    // async function encodePDFToBase64(pdfPath: string): Promise<string> {
+    //   const pdfBuffer = await fs.readFile(pdfPath);
+    //   const base64PDF = pdfBuffer.toString('base64');
+    //   return `data:application/pdf;base64,${base64PDF}`;
+    // }
 
 // Read and encode the PDF
 
