@@ -99,6 +99,9 @@ async function getPdfContents(pdfPath: string): Promise<TextResult> {
   await parser.destroy();
   return result
 }
+  
+// const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
+// getPdfContents(pdfPath)
 export const getResumeDetail = async()=>{
     // async function encodePDFToBase64(pdfPath: string): Promise<string> {
     //   const pdfBuffer = await fs.readFile(pdfPath);
@@ -126,7 +129,7 @@ export const getResumeDetail = async()=>{
               content: [
                 {
                   type: 'text',
-                  text:`Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines resume: ${content}` ,
+                  text:`Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines resume: ${content.text}` ,
                 },
                 // {
                 //   type: 'file',
