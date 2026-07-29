@@ -6,7 +6,7 @@ import { PDFParse, TextResult } from "pdf-parse";
 dotenv.config();
 
 
-async function getPdfContents(pdfPath: string): Promise<TextResult> {
+async function getPdfContent(pdfPath: string): Promise<TextResult> {
   const buffer = await fs.readFile(pdfPath);
   const parser = new PDFParse({
     data: buffer, 
@@ -17,18 +17,10 @@ async function getPdfContents(pdfPath: string): Promise<TextResult> {
 }
   
 // const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
-// getPdfContents(pdfPath)
+// getPdfContent(pdfPath)
 export const getResumeDetail = async()=>{
-    // async function encodePDFToBase64(pdfPath: string): Promise<string> {
-    //   const pdfBuffer = await fs.readFile(pdfPath);
-    //   const base64PDF = pdfBuffer.toString('base64');
-    //   return `data:application/pdf;base64,${base64PDF}`;
-    // }
-
-// Read and encode the PDF
-
   const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
-  const content = await getPdfContents(pdfPath);
+  const content = await getPdfContent(pdfPath);
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
