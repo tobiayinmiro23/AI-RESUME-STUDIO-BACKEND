@@ -1,7 +1,10 @@
 import fs from "fs"
 import dotenv from "dotenv";
 import path from 'path';
+// import pdf from "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
+console.log(PDFParse);
 dotenv.config();
 
 // fetch request example
@@ -159,3 +162,12 @@ export const getResumeDetail = async()=>{
       }
   }
 }
+
+// async function test() {
+//   const buffer = fs.readFileSync(
+//     "./uploads/1785230040147-Ayinmiro Tobi B E.pdf"
+//   );
+//   const result = await pdf(buffer);
+
+//   console.log(result.text);
+// }
