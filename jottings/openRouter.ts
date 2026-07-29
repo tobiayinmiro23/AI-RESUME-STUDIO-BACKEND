@@ -1,10 +1,9 @@
-import fs from "fs"
+import fs from "fs/promises"
 import dotenv from "dotenv";
 import path from 'path';
-// import pdf from "pdf-parse";
-import { PDFParse } from "pdf-parse";
+import { PDFParse, TextResult } from "pdf-parse";
+import { text } from "stream/consumers";
 
-console.log(PDFParse);
 dotenv.config();
 
 // fetch request example
@@ -94,7 +93,7 @@ export const promptTest = async()=>{
 
 export const getResumeDetail = async()=>{
     async function encodePDFToBase64(pdfPath: string): Promise<string> {
-      const pdfBuffer = await fs.promises.readFile(pdfPath);
+      const pdfBuffer = await fs.readFile(pdfPath);
       const base64PDF = pdfBuffer.toString('base64');
       return `data:application/pdf;base64,${base64PDF}`;
     }
@@ -102,8 +101,7 @@ export const getResumeDetail = async()=>{
 // Read and encode the PDF
 
   const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
-  const base64PDF = await encodePDFToBase64(pdfPath);
-  console.log(base64PDF)
+  const content = await getPdfContents(pdfPath);
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -120,28 +118,28 @@ export const getResumeDetail = async()=>{
               content: [
                 {
                   type: 'text',
-                  text:"Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines",
+                  text:`Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines resume: ${content}` ,
                 },
-                {
-                  type: 'file',
-                  file: {
-                    filename: '1785230040147-Ayinmiro Tobi B E.pdf',
-                    file_data: base64PDF,
-                  },
-                },
+                // {
+                //   type: 'file',
+                //   file: {
+                //     filename: '1785230040147-Ayinmiro Tobi B E.pdf',
+                //     file_data: base64PDF,
+                //   },
+                // },
               ],
             },
           ],
           // Optional: Configure PDF processing engine
           // PDF parsing will still work even if the plugin is not explicitly set
-          plugins: [
-            {
-              id: 'file-parser',
-              pdf: {
-                engine: 'cloudflare-ai', // defaults to "mistral-ocr". See Pricing above
-              },
-            },
-          ],
+          // plugins: [
+          //   {
+          //     id: 'file-parser',
+          //     pdf: {
+          //       engine: 'cloudflare-ai', // defaults to "mistral-ocr". See Pricing above
+          //     },
+          //   },
+          // ],
         }),
       });
       console.log(response)
@@ -171,3 +169,17 @@ export const getResumeDetail = async()=>{
 
 //   console.log(result.text);
 // }
+async function getPdfContents(pdfPath: string): Promise<TextResult> {
+  // Read the PDF into a Buffer
+  const buffer = await fs.readFile(pdfPath);
+  // Create the parser
+  const parser = new PDFParse({
+    data: buffer,
+  });
+  // Extract text
+  const result = await parser.getText();
+  // Clean up
+  await parser.destroy();
+  return result
+}
+
