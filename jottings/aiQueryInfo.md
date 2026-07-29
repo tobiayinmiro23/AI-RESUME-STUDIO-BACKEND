@@ -16,3 +16,18 @@ Professional tone score
 Technologies detected
 Technologies missing/recomended
 Suggested keywords for ATS
+
+2. Job Tailoring ⭐⭐⭐⭐⭐
+
+This is probably the highest-value premium feature.
+User pastes:
+Job description
+
+AI returns:
+ATS score against the job
+Missing keywords
+Missing skills
+Matching percentage
+Customized summary
+Customized experience bullets
+Customized skills section
