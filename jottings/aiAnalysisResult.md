@@ -99,7 +99,7 @@
     }
   ],
   "repetition": {
-    "status": "issues found",
+    "status": "no issues || minor repetition || moderate repetition || significant repetition",
     "overview": "Several action verbs and phrases are repeated throughout the experience section.",
     "items": [
       {
