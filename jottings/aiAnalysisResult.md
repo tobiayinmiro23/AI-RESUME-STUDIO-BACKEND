@@ -20,7 +20,7 @@
   "length": {
     "pages": 2,
     "wordCount": 684,
-    "assessment": "good",
+    "assessment": "appropriate || slightly long || too long || slightly short || too short",
     "overview": "The resume is an appropriate length for the candidate's apparent experience level."
   },
   "sections": {
