@@ -62,7 +62,7 @@
     "Descriptions contain generic statements without specific impact."
   ]
   },
-  "technologies": {
+  "skills": {
     "detected": [
       "React",
       "Node.js",

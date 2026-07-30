@@ -13,7 +13,7 @@
     "experience",
     "grammar",
     "writingStyle",
-    "technologies",
+    "skills",
     "keywords",
     "strengths",
     "weaknesses",
@@ -305,7 +305,7 @@
       }
     },
 
-    "technologies": {
+    "skills": {
       "type": "object",
       "additionalProperties": false,
       "required": [
