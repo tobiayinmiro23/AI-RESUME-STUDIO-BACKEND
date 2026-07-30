@@ -1,6 +1,5 @@
 things to ask from the AI
 1. Resume Analysis (Core)
-You can enrich this with:
 
 ATS score breakdown (formatting, keywords, experience, education, readability)
 Resume strengths
