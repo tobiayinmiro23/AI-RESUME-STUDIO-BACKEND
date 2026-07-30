@@ -16,7 +16,6 @@ async function getPdfContent(pdfPath: string): Promise<TextResult> {
   return result
 }
   
-// const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
 // getPdfContent(pdfPath)
 export const getResumeDetail = async()=>{
   const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
