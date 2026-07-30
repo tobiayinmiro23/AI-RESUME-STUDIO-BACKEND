@@ -42,7 +42,6 @@ export const getResumeDetail = async()=>{
     }
     const data = await response.json();
     return data;
-
   } catch (error:any) {
     console.log(error)
     return {
