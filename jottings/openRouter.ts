@@ -37,13 +37,6 @@ export const getResumeDetail = async()=>{
                   type: 'text',
                   text:`Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines resume: ${content.text}` ,
                 },
-                // {
-                //   type: 'file',
-                //   file: {
-                //     filename: '1785230040147-Ayinmiro Tobi B E.pdf',
-                //     file_data: base64PDF,
-                //   },
-                // },
               ],
             },
           ],
