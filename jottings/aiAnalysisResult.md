@@ -50,10 +50,18 @@
     "issues": []
   },
   "writingStyle": {
-    "score": 88,
-    "type": "professional",
-    "overview": "The writing is clear, confident, and appropriate for a professional resume.",
-    "issues": []
+  "score": 62,
+  "type": "generic",
+  "characteristics": [
+    "passive",
+    "verbose",
+    "generic"
+  ],
+  "overview": "The writing is understandable but relies heavily on generic descriptions and passive language.",
+  "issues": [
+    "Several bullet points use passive or weak phrasing.",
+    "Descriptions contain generic statements without specific impact."
+  ]
   },
   "technologies": {
     "detected": [
