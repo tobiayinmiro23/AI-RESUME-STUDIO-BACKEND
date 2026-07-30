@@ -34,10 +34,11 @@ export const getResumeDetail = async()=>{
       });
       console.log(response)
     if(!response.ok){
+        const error = await response.json();
         return {
-          success:false,
-          message:"an error occured"
-        }
+          success: false,
+          message: error.message || "An error occurred"
+        };
     }
     const data = await response.json();
     return data;
