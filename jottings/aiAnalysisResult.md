@@ -9,7 +9,7 @@
     "readability": 78
   },
   "contact": {
-    "status": "complete",
+    "status": "complete || mostly complete || partially complete || incomplete || missing",
     "overview": "Your resume contains the expected contact information, including a valid email address, phone number, and LinkedIn profile."
   },
   "readability": {
