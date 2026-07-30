@@ -40,16 +40,6 @@ export const getResumeDetail = async()=>{
               ],
             },
           ],
-          // Optional: Configure PDF processing engine
-          // PDF parsing will still work even if the plugin is not explicitly set
-          // plugins: [
-          //   {
-          //     id: 'file-parser',
-          //     pdf: {
-          //       engine: 'cloudflare-ai', // defaults to "mistral-ocr". See Pricing above
-          //     },
-          //   },
-          // ],
         }),
       });
       console.log(response)
