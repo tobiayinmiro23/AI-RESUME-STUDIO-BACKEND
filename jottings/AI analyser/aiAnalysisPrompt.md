@@ -1,0 +1,1 @@
+Identify the candidate's profession, industry, and area of expertise from the resume. Evaluate skills and keywords according to the candidate's actual professional domain. Do not assume the candidate works in technology, software engineering, or any other specific industry.
