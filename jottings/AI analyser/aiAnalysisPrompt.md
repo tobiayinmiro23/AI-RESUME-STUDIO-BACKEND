@@ -1,1 +1,10 @@
-Identify the candidate's profession, industry, and area of expertise from the resume. Evaluate skills and keywords according to the candidate's actual professional domain. Do not assume the candidate works in technology, software engineering, or any other specific industry.
+Analyze the resume according to the candidate's actual profession, industry,
+and specialization.
+
+Do not assume the resume is technology-related.
+
+Skills, recommended skills, and suggested ATS keywords must be relevant
+to the candidate's professional domain.
+
+Do not recommend skills or keywords simply because they are commonly used
+in another industry.
