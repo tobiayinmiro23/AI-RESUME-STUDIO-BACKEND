@@ -24,7 +24,7 @@
     "overview": "The resume is an appropriate length for the candidate's apparent experience level."
   },
   "sections": {
-    "status": "mostly complete",
+    "status": "complete || mostly complete || partially complete || incomplete",
     "present": [
       "Summary",
       "Experience",
