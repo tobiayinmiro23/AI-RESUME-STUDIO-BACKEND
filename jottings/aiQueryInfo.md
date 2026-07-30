@@ -12,6 +12,12 @@ Professional tone score
 Technologies detected
 Technologies missing/recomended
 Suggested keywords for ATS
+Achievement quality
+Standard section headings
+Standard fonts
+Good font size
+Consistent spacing
+Consistent date formatting
 
 2. Job Tailoring ⭐⭐⭐⭐⭐
 
