@@ -41,7 +41,6 @@
     "score": 74,
     "achievementScore": 61,
     "quantificationScore": 48,
-    "actionVerbScore": 82,
     "overview": "The experience section demonstrates relevant technical experience, but several descriptions focus more on responsibilities than measurable achievements."
   },
   "grammar": {
