@@ -157,61 +157,61 @@ export const promptTest = async()=>{
 
 
 //  this endpoint is not free
-export const getResumeDetailsWithUrl = async()=>{
-   try {
-             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-    'Content-Type': 'application/json',
-  },
-    body: JSON.stringify({
-    model: 'inclusionai/ling-3.0-flash:free', 
-    messages: [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: 'give a 5 line summary of this pdf file',
-          },
-          {
-            type: 'file',
-            file: {
-              filename: '1785230040147-Ayinmiro Tobi B E.pdf',
-              file_data: 'https://raw.githubusercontent.com/tobiayinmiro23/AI-RESUME-STUDIO-BACKEND/main/uploads/1785230040147-Ayinmiro%20Tobi%20B%20E.pdf',
-            },
-          },
-        ],
-      },
-    ],
-    // Optional: Configure PDF processing engine
-    // plugins: [
-    //   {
-    //     id: 'file-parser',
-    //     pdf: {
-    //       engine: 'mistral-ocr',
-    //     },
-    //   },
-    // ],
-  }),
-});
-    console.log(response)
+// export const getResumeDetailsWithUrl = async()=>{
+//    try {
+//              const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+//   method: 'POST',
+//   headers: {
+//     Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+//     'Content-Type': 'application/json',
+//   },
+//     body: JSON.stringify({
+//     model: 'inclusionai/ling-3.0-flash:free', 
+//     messages: [
+//       {
+//         role: 'user',
+//         content: [
+//           {
+//             type: 'text',
+//             text: 'give a 5 line summary of this pdf file',
+//           },
+//           {
+//             type: 'file',
+//             file: {
+//               filename: '1785230040147-Ayinmiro Tobi B E.pdf',
+//               file_data: 'https://raw.githubusercontent.com/tobiayinmiro23/AI-RESUME-STUDIO-BACKEND/main/uploads/1785230040147-Ayinmiro%20Tobi%20B%20E.pdf',
+//             },
+//           },
+//         ],
+//       },
+//     ],
+//     // Optional: Configure PDF processing engine
+//     // plugins: [
+//     //   {
+//     //     id: 'file-parser',
+//     //     pdf: {
+//     //       engine: 'mistral-ocr',
+//     //     },
+//     //   },
+//     // ],
+//   }),
+// });
+//     console.log(response)
 
-if(!response.ok){
-      return {
-        success:false,
-        message:"an error occured"
-      }
-  }
-      const data = await response.json();
-    return data;
+// if(!response.ok){
+//       return {
+//         success:false,
+//         message:"an error occured"
+//       }
+//   }
+//       const data = await response.json();
+//     return data;
 
-   } catch (error:any) {
-    console.log(error)
-    return {
-        success:false,
-        message:error.message || "an error occured"
-      }
-   }
-}
+//    } catch (error:any) {
+//     console.log(error)
+//     return {
+//         success:false,
+//         message:error.message || "an error occured"
+//       }
+//    }
+// }
