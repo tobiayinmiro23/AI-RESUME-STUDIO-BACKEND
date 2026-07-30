@@ -109,7 +109,7 @@
     ]
   },
   "timeline": {
-    "status": "consistent",
+    "status": "consistent || minor inconsistencies || inconsistencies found || significant inconsistencies",
     "overview": "Employment and education dates appear consistent with no obvious overlapping positions.",
     "issues": []
   },
