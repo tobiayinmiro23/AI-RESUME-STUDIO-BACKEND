@@ -1,21 +1,11 @@
-import fs from "fs/promises"
 import dotenv from "dotenv";
 import path from 'path';
-import { PDFParse, TextResult } from "pdf-parse";
+import { getPdfContent } from "./pdfParser";
 
 dotenv.config();
 
 
-async function getPdfContent(pdfPath: string): Promise<TextResult> {
-  const buffer = await fs.readFile(pdfPath);
-  const parser = new PDFParse({
-    data: buffer, 
-  });
-  const result = await parser.getText();
-  await parser.destroy();
-  return result
-}
-  
+
 export const getResumeDetail = async()=>{
   const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
   const content = await getPdfContent(pdfPath);
