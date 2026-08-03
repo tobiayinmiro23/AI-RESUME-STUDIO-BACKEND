@@ -20,7 +20,6 @@ Consistent spacing
 Consistent date formatting
 
 2. Job Tailoring ⭐⭐⭐⭐⭐
-
 This is probably the highest-value premium feature.
 User pastes:
 Job description
