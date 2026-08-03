@@ -1,0 +1,4 @@
+{
+  "resumeData": {...},
+  "originalResumeText": "..."
+}
