@@ -1,3 +1,4 @@
+import { getResumeDetail } from "../lib/openRouter/extractResumeDetail";
 import { ResumeModel } from "../models/resume";
 
 class ResumeRepository{
@@ -6,6 +7,9 @@ class ResumeRepository{
     }
     async createResume(userId: string, fileName: string, pdfHash: string, extractedText: string, resumeData: any) {
         return await ResumeModel.create({ userId, fileName, pdfHash, extractedText, resumeData });
+    }
+    async getResumeDetail(userId: string) {
+        return await ResumeModel.find({ userId });
     }
 }
 
