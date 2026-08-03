@@ -19,13 +19,6 @@ const resumeSchema = new Schema(
       type: String,
       required: true,
     },
-
-    resumeTitle: {
-      type: String,
-      trim: true,
-      default: null,
-    },
-
     extractedText: {
       type: String,
       required: true,

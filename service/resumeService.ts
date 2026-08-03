@@ -18,7 +18,7 @@ class ResumeService {
         }else{
             const content = await getPdfContent(pdfPath);
             let response = await getResumeDetail(content.text)
-
+            await resumeRepository.createResume(req.userId, req.file.originalname, pdfHash, content.text, response);
         }
         // Process the PDF content as needed
     }
