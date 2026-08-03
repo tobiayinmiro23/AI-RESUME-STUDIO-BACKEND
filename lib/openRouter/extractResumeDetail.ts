@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from 'path';
-import { getPdfContent } from "./pdfParser";
+import { getPdfContent } from "../pdfParser";
 
 dotenv.config();
 
