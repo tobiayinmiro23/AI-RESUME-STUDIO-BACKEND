@@ -17,7 +17,7 @@ class ResumeService {
 
         }else{
             const content = await getPdfContent(pdfPath);
-             let response = await getResumeDetail(content.text)
+            let response = await getResumeDetail(content.text)
 
         }
         // Process the PDF content as needed
