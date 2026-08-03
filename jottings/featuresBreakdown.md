@@ -19,7 +19,8 @@ Good font size
 Consistent spacing
 Consistent date formatting
 
-2. Job Tailoring ⭐⭐⭐⭐⭐
+2. Resume to job analysis
+
 This is probably the highest-value premium feature.
 User pastes:
 Job description
@@ -65,3 +66,8 @@ job description
 Generate:
 cover letter
 LinkedIn message
+
+6. resume to job AI remake
+
+
+based of the resume to job match the AI tailors the resume tomat h the job description more closely
