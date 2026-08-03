@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { TextResult } from "pdf-parse";
 import {resumeContentExtractorPrompt} from "../../aiCallInformation/AI-Resume-Content-Extractor/aiContentExtractorPrompt";
+import {resumeDataSchema} from "../../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
 dotenv.config();
 
 
@@ -20,14 +21,14 @@ export const getResumeDetail = async(content:TextResult)=>{
           messages: [
             {
               role: "system",
-              content: resumeExtractionPrompt
+              content: resumeContentExtractorPrompt
             },
             {
               role: 'user',
               content: [
                 {
                   type: 'text',
-                  text:`Extract all readable text from this resume give a brief overview/ summary of the readable text, the summary must not be more than 12 lines resume: ${content.text}` ,
+                  text:content.text,
                 },
               ],
             },
@@ -37,7 +38,7 @@ export const getResumeDetail = async(content:TextResult)=>{
             json_schema: {
               name: "resume_extraction",
               strict: true,
-              schema: resumeExtractionSchema
+              schema: resumeDataSchema
             }
           }
         }),
