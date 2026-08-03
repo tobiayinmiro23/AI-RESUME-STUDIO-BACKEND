@@ -69,5 +69,4 @@ LinkedIn message
 
 6. resume to job AI remake
 
-
 based of the resume to job match the AI tailors the resume tomat h the job description more closely
