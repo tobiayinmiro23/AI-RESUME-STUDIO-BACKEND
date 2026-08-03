@@ -13,6 +13,7 @@ class resumeController {
 
     async UploadController(req: Request, res:Response) {
             ResumeFileValidator(req);
+            console.log(req.file);
             return res.status(200).json({
                 success: true,
                 message: "file uploaded successfully",
