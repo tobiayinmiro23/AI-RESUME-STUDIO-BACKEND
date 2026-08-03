@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { TextResult } from "pdf-parse";
-
+import {resumeContentExtractorPrompt} from "../../aiCallInformation/AI-Resume-Content-Extractor/aiContentExtractorPrompt";
 dotenv.config();
 
 
@@ -19,6 +19,10 @@ export const getResumeDetail = async(content:TextResult)=>{
           model: 'inclusionai/ling-3.0-flash:free', 
           messages: [
             {
+              role: "system",
+              content: resumeExtractionPrompt
+            },
+            {
               role: 'user',
               content: [
                 {
@@ -28,6 +32,14 @@ export const getResumeDetail = async(content:TextResult)=>{
               ],
             },
           ],
+          response_format: {
+            type: "json_schema",
+            json_schema: {
+              name: "resume_extraction",
+              strict: true,
+              schema: resumeExtractionSchema
+            }
+          }
         }),
       });
       console.log(response)
