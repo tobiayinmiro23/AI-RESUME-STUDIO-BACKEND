@@ -18,8 +18,6 @@ const resumeSchema = new Schema(
     pdfHash: {
       type: String,
       required: true,
-      unique: true,
-      index: true,
     },
 
     resumeTitle: {
