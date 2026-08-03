@@ -5,3 +5,6 @@ class ResumeRepository{
         return await ResumeModel.findOne({ userId, pdfHash });
     }
 }
+
+const resumeRepository = new ResumeRepository();
+export default resumeRepository;
