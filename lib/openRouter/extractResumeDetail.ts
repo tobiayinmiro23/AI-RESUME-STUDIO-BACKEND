@@ -1,14 +1,12 @@
 import dotenv from "dotenv";
-import path from 'path';
-import { getPdfContent } from "../pdfParser";
+import { TextResult } from "pdf-parse";
 
 dotenv.config();
 
 
 
-export const getResumeDetail = async()=>{
-  const pdfPath = path.join(__dirname, '../uploads/1785230040147-Ayinmiro Tobi B E.pdf');
-  const content = await getPdfContent(pdfPath);
+export const getResumeDetail = async(content:TextResult)=>{
+  
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
