@@ -3,15 +3,23 @@ import { Request, Response } from "express";
 import { getPdfContent } from "../lib/pdfParser";
 import {hashPdf } from "../utils/pdfHash"
 import resumeRepository from "../repository/resumeRepository";
+import { getResumeDetail } from "../lib/openRouter/extractResumeDetail";
+
 
 class ResumeService {
     async uploadResume(req: Request) {
         if (!req.file) throw new AppError("Resume file is required", 400);
+        if (!req.userId) throw new AppError("Unauthorized request", 400);
         const pdfPath = `../${req.file.path}`;
         const pdfHash= await hashPdf(pdfPath);
-        
-        const content = await getPdfContent(pdfPath);
-        return content;
+        const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(req.userId, pdfHash);
+        if(pdfHashExists){
+
+        }else{
+            const content = await getPdfContent(pdfPath);
+             let response = await getResumeDetail(content.text)
+
+        }
         // Process the PDF content as needed
     }
 

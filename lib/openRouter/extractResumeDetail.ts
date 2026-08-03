@@ -1,12 +1,11 @@
 import dotenv from "dotenv";
-import { TextResult } from "pdf-parse";
 import {resumeContentExtractorPrompt} from "../../aiCallInformation/AI-Resume-Content-Extractor/aiContentExtractorPrompt";
 import {resumeDataSchema} from "../../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
 dotenv.config();
 
 
 
-export const getResumeDetail = async(content:TextResult)=>{
+export const getResumeDetail = async(content:string)=>{
   
   try {
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -28,7 +27,7 @@ export const getResumeDetail = async(content:TextResult)=>{
               content: [
                 {
                   type: 'text',
-                  text:content.text,
+                  text:content,
                 },
               ],
             },
