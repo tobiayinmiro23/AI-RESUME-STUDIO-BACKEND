@@ -1,4 +1,4 @@
-{
+export const resumeDataSchema={
   "metadata": {
     "resumeTitle": "",
     "resumeType": "",

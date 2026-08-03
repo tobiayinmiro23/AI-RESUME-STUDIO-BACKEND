@@ -1,3 +1,4 @@
+export const resumeContentExtractorPrompt=`
 You are an expert resume parser.
 
 Your task is to extract factual information from the provided resume and return ONLY valid JSON matching the supplied schema.
@@ -55,3 +56,4 @@ Each additional section should contain:
 15. Preserve the meaning of the resume. Do not rewrite or improve it.
 
 Return only valid JSON matching the schema.
+`
