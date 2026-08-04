@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import authService from "../service/authService";
 import { AppError } from "../utils/appError";
 
 const ResumeFileValidator=(req:Request)=>{
