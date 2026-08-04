@@ -23,7 +23,10 @@ const resumeSchema = new Schema(
       type: String,
       required: true,
     },
-
+    modelUsed: {
+      type: String,
+      // required: true,
+    },
     resumeData: {
       type: Schema.Types.Mixed,
       required: true,
