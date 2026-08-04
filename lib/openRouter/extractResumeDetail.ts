@@ -43,14 +43,18 @@ export const getResumeDetail = async(content:string)=>{
           }
         }),
       });
+      // await response.json();
       console.log(response)
-    if(!response.ok){
-        const error = await response.json();
-        return {
-          success: false,
-          message: error.message || "An error occurred"
-        };
-    }
+      if (!response.ok) {
+          const error = await response.json();
+
+          throw new AppError(
+              error.error?.message ??
+              error.message ??
+              "AI request failed.",
+              response.status
+          );
+      }
     const data = await response.json();
     return data;
   } catch (error) {
