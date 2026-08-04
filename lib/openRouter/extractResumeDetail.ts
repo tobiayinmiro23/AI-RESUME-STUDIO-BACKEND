@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import {resumeContentExtractorPrompt} from "../../aiCallInformation/AI-Resume-Content-Extractor/aiContentExtractorPrompt";
 import {resumeDataSchema} from "../../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
+import { AppError } from "../../utils/appError";
 dotenv.config();
 
 
@@ -54,10 +55,7 @@ export const getResumeDetail = async(content:string)=>{
     return data;
   } catch (error:any) {
     console.log(error)
-    return {
-        success:false,
-        message:error.message || "unable to get resume info from the AI service, please try again later"
-      }
+        throw new AppError(`${error instanceof Error ? error.message : "unable to get resume info from the AI service, please try again later"}`, 500);
   }
 }
 
