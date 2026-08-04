@@ -16,6 +16,7 @@ export function hashPdf(filePath: string): Promise<string> {
     stream.on("error", reject);
   });
   }catch(error){
+    console.log("pdf hash error")
     throw new AppError(`Failed to hash PDF: ${error instanceof Error ? error.message : "Unknown error"}`, 500);
   }
 }
