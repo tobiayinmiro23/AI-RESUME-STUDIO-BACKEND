@@ -43,21 +43,21 @@ export const getResumeDetail = async(content:string)=>{
           }
         }),
       });
-      // await response.json();
+    const data = await response.json();
       console.log(response)
       if (!response.ok) {
-          const error = await response.json();
+          // const error = await response.json();
 
           throw new AppError(
-              error.error?.message ??
-              error.message ??
+              data.error?.message ??
+              data.message ??
               "AI request failed.",
               response.status
           );
       }
-    const data = await response.json();
     return data;
   } catch (error) {
+    // console.log(await response.clone().json());
     console.log(error)
     if (error instanceof AppError) throw error;
       throw new AppError("Unable to communicate with the AI service, try again later",500);
