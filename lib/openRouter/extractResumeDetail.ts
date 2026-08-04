@@ -53,7 +53,7 @@ export const getResumeDetail = async(content:string)=>{
     }
     const data = await response.json();
     return data;
-  } catch (error:any) {
+  } catch (error) {
     console.log(error)
         throw new AppError(`${error instanceof Error ? error.message : "unable to get resume info from the AI service, please try again later"}`, 500);
   }
