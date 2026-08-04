@@ -26,7 +26,6 @@ class ResumeService {
             console.log("AI response",response)
             await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, response);
         } catch (error) {
-            console.log(error?.constructor.name);
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
         } finally {
