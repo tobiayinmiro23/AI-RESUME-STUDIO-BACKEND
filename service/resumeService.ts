@@ -12,13 +12,15 @@ class ResumeService {
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = `../${req.file.path}`;
         try {
-            if (!req.userId) throw new AppError("Unauthorized request", 400);
+            const userIdHeader = req.headers.userId;
+            if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
+            const userId = userIdHeader;
             const pdfHash= await hashPdf(pdfPath);
-            const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(req.userId, pdfHash);
+            const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
             const content = await getPdfContent(pdfPath);
             const response = await getResumeDetail(content.text)
-            await resumeRepository.createResume(req.userId, req.file.originalname, pdfHash, content.text, response);
+            await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, response);
         } catch (error) {
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
