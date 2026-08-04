@@ -56,7 +56,7 @@ export const getResumeDetail = async(content:string)=>{
     console.log(error)
     return {
         success:false,
-        message:error.message || "an error occured"
+        message:error.message || "unable to get resume info from the AI service, please try again later"
       }
   }
 }
