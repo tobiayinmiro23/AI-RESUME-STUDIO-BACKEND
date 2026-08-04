@@ -1,5 +1,6 @@
 import { createHash } from "crypto";
 import { createReadStream } from "fs";
+import { AppError } from "./appError";
 
 export function hashPdf(filePath: string): Promise<string> {
   try{
@@ -15,6 +16,6 @@ export function hashPdf(filePath: string): Promise<string> {
     stream.on("error", reject);
   });
   }catch(error){
-    throw new Error(`Failed to hash PDF: ${error instanceof Error ? error.message : "Unknown error"}`);
+    throw new AppError(`Failed to hash PDF: ${error instanceof Error ? error.message : "Unknown error"}`, 500);
   }
 }
