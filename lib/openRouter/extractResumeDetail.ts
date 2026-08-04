@@ -33,14 +33,7 @@ export const getResumeDetail = async(content:string)=>{
               ],
             },
           ],
-          response_format: {
-            type: "json_schema",
-            json_schema: {
-              name: "resume_extraction",
-              strict: true,
-              schema: resumeDataSchema
-            }
-          }
+        
         }),
       });
     const data = await response.json();
