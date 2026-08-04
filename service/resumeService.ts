@@ -20,9 +20,9 @@ class ResumeService {
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
             const content = await getPdfContent(pdfPath);
             const AIresponse = await getResumeDetail(content.text)
-            const promptResult= AIresponse.choices[0].message.content
+            const result= AIresponse.choices[0].message.content
             console.log("AI response",AIresponse)
-            await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, promptResult);
+            await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, result);
             return { message: "Resume uploaded successfully", success: true };
         } catch (error) {
             if (error instanceof AppError) throw error;
