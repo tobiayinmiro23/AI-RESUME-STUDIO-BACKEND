@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import resumeController from "../controller/resumeController";
 import { uploadMiddleware } from "../middleware/fileUpload";
 const resumeRoutes = express.Router()
