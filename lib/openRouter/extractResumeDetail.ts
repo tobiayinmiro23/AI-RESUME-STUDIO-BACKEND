@@ -55,6 +55,14 @@ export const getResumeDetail = async(content:string)=>{
     return data;
   } catch (error) {
     console.log(error)
+    if (error instanceof AppError) {
+    throw error;
+}
+
+throw new AppError(
+    "Unable to communicate with the AI service.",
+    500
+);
         throw new AppError(`${error instanceof Error ? error.message : "unable to get resume info from the AI service, please try again later"}`, 500);
   }
 }
