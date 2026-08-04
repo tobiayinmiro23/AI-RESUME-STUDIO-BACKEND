@@ -1,5 +1,5 @@
 import { AppError } from "../utils/appError";
-import { Request, Response } from "express";
+import { Request } from "express";
 import { getPdfContent } from "../lib/pdfParser";
 import {hashPdf } from "../utils/pdfHash"
 import resumeRepository from "../repository/resumeRepository";
