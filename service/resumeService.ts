@@ -20,7 +20,7 @@ class ResumeService {
             const response = await getResumeDetail(content.text)
             await resumeRepository.createResume(req.userId, req.file.originalname, pdfHash, content.text, response);
         } catch (error) {
-            if (error instanceof AppError) throw new AppError(error.message, error.statusCode);
+            if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
         } finally {
             await deleteUploadedFile(pdfPath);
