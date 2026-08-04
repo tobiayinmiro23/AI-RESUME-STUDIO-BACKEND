@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AppError } from "../utils/appError";
+import resumeService from "../service/resumeService"
 
 const ResumeFileValidator=(req:Request)=>{
         if (!req.file) throw new AppError("Resume file is required", 400);
@@ -13,10 +14,8 @@ class resumeController {
     async UploadController(req: Request, res:Response) {
             ResumeFileValidator(req);
             console.log(req.file);
-            return res.status(200).json({
-                success: true,
-                message: "file uploaded successfully",
-            });
+            let result = await resumeService.uploadResume(req);
+            return res.status(200).json(result);
     }
      
 }
