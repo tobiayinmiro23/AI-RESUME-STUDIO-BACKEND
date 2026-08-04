@@ -57,11 +57,13 @@ export const resumeDataSchema={
     }
   ],
   "skills": [
-    {
-      "name": "",
-      "category": ""
-    }
-  ],
+      {
+        "category": "",
+        "items": [
+          ""
+        ]
+      }
+    ],
   "projects": [
     {
       "title": "",
