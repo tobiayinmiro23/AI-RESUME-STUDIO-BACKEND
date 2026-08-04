@@ -23,7 +23,7 @@ class ResumeService {
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
         } finally {
-            await deleteUploadedFile(pdfPath);
+            await deleteUploadedFile(req.file.path);
         }
         
     }
