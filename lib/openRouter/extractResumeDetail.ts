@@ -47,7 +47,6 @@ export const getResumeDetail = async(content:string)=>{
     if (!response.ok) throw new AppError(data.error?.message ?? data.message ?? "AI request failed.",response.status);
     return data;
   } catch (error) {
-    // console.log(await response.clone().json());
     console.log(error)
     if (error instanceof AppError) throw error;
     throw new AppError("Unable to communicate with the AI service, try again later",500);
