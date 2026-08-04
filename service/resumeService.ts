@@ -17,6 +17,7 @@ class ResumeService {
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
             const pdfHash= await hashPdf(pdfPath);
+            console.log(pdfHash)
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
             const content = await getPdfContent(pdfPath);
