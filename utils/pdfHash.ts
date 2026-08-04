@@ -13,14 +13,7 @@ export function hashPdf(filePath: string): Promise<string> {
     stream.on("end", () => {
       resolve(hash.digest("hex"));
     });
-    stream.on("error", (error) => {
-    reject(
-        new AppError(
-            `Failed to hash PDF: ${error.message}`,
-            500
-        )
-    );
-});
+    stream.on("error", (error) => reject(new AppError(`Failed to hash PDF: ${error.message}`,500)));
   });
   }catch(error){
     console.log("pdf hash error")
