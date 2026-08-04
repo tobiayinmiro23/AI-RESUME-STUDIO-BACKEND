@@ -44,7 +44,6 @@ export const getResumeDetail = async(content:string)=>{
         }),
       });
     const data = await response.json();
-      console.log(response)
     if (!response.ok) throw new AppError(data.error?.message ?? data.message ?? "AI request failed.",response.status);
     return data;
   } catch (error) {
