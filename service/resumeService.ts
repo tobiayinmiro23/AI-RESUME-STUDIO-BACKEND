@@ -9,10 +9,11 @@ import { deleteUploadedFile } from "../utils/deleteFile";
 
 class ResumeService {
     async uploadResume(req: Request) {
+        // console.log(req)
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = `../${req.file.path}`;
         try {
-            const userIdHeader = req.headers.userId;
+            const userIdHeader = req.headers.userid;
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
             const pdfHash= await hashPdf(pdfPath);
