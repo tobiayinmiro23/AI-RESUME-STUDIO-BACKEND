@@ -1,4 +1,3 @@
-import { getResumeDetail } from "../lib/openRouter/extractResumeDetail";
 import { ResumeModel } from "../models/resume";
 
 class ResumeRepository{
