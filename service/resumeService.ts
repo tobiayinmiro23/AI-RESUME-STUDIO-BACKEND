@@ -16,13 +16,14 @@ class ResumeService {
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
             const pdfHash= await hashPdf(pdfPath);
-            console.log(pdfHash)
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
+            console.log(pdfHashExists)
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
             const content = await getPdfContent(pdfPath);
-            const response = await getResumeDetail(content.text)
-            console.log("AI response",response)
-            await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, response);
+            const AIresponse = await getResumeDetail(content.text)
+            const promptResult= AIresponse.choices[0].message.content
+            console.log("AI response",AIresponse)
+            await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, promptResult);
             return { message: "Resume uploaded successfully", success: true };
         } catch (error) {
             if (error instanceof AppError) throw error;
