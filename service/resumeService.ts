@@ -9,7 +9,6 @@ import { deleteUploadedFile } from "../utils/deleteFile";
 
 class ResumeService {
     async uploadResume(req: Request) {
-        // console.log(req)
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = req.file.path;
         try {
