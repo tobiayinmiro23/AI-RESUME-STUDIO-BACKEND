@@ -1,0 +1,1 @@
+1. Add the ai model used as part of the resume database document
