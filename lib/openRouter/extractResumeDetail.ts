@@ -51,7 +51,7 @@ export const getResumeDetail = async(content:string)=>{
     // console.log(await response.clone().json());
     console.log(error)
     if (error instanceof AppError) throw error;
-      throw new AppError("Unable to communicate with the AI service, try again later",500);
+    throw new AppError("Unable to communicate with the AI service, try again later",500);
   }
 }
 
