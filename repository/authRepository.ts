@@ -3,7 +3,7 @@ import {OtpModel, UserModel} from "../models/auth";
 export class AuthRepository {
     // user related methods
     async findUserByEmail(email: string) {
-        return await UserModel.findOne({ email });
+        return await UserModel.findOne({ email }).lean();
     }
     async createUser(email: string, password: string) {
         return await UserModel.create({ email, password });
