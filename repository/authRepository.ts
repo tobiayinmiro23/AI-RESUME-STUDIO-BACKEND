@@ -22,7 +22,7 @@ export class AuthRepository {
         return await OtpModel.updateOne({ email }, { email, codeHash, expiresAt }, { upsert: true });
     }
     async findOtpByEmail(email: string) {
-        return await OtpModel.findOne({ email });
+        return await OtpModel.findOne({ email }).lean();
     }
     async deleteOtpByEmail(email: string) {
         return await OtpModel.deleteOne({ email });
