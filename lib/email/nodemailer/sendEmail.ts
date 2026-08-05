@@ -5,13 +5,6 @@ import { welcomeTemplate, } from "./templates/welcome";
 import dotenv from "dotenv";
 dotenv.config();
 
-interface SendEmailOptions {
-  to: string;
-  subject: string;
-  html: string;
-  name:string
-  text?: string;
-}
 class EmailService {
 
  async sendWelcomeEmail(to: string, name: string){
