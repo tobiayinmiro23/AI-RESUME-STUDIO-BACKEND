@@ -17,13 +17,14 @@ class EmailService {
 
  async welcomeEmail({to,name}: SendEmailOptions){
     try {
-        await transporter.sendMail({
+        const response=await transporter.sendMail({
         from: process.env.SMTP_FROM,
         to,
         subject:"AI Resume Studio",
         // text,
         html:welcomeTemplate(name),
         });
+        console.log(response)
     } catch {
         throw new AppError("Unable to send email.", 500);
     }
