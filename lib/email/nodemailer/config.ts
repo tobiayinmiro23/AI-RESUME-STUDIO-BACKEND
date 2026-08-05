@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { AppError } from "../../../utils/appError";
 dotenv.config();
 
 export const transporter = nodemailer.createTransport({
