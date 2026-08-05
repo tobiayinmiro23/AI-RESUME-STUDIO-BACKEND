@@ -1,5 +1,7 @@
 import emailjs from "@emailjs/nodejs";
+import dotenv from "dotenv";
 import { AppError } from "../../utils/appError";
+dotenv.config();
 
 class EmailService {
     async sendEmail (toEmail: string, name: string) {
