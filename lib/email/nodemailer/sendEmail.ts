@@ -1,4 +1,3 @@
-// services/email.service.ts
 import { transporter } from "./config";
 import { AppError } from "../../../utils/appError";
 import { otpTemplate, } from "./templates/otp";
@@ -25,7 +24,8 @@ class EmailService {
         html:welcomeTemplate(name),
         });
         console.log(response)
-    } catch {
+    } catch(error) {
+        console.log(error)
         throw new AppError("Unable to send email.", 500);
     }
 };
