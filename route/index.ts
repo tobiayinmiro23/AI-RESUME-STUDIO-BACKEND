@@ -11,7 +11,7 @@ router.use('/api/v1/welcome-email', async (req:Request, res:Response)=>{
     // code for the emailjs send feature
     const response= await emailService.sendEmail("tobiayinmiro1@gmail.com","tobi")
     res.status(response.status).json({success:true,message:"email sent successfully"})
-
+      // code for the nodemailer send feature
     // await emailService.sendWelcomeEmail("tobiayinmiro1@gmail.com","tobi")
     // res.status(200).json({success:true,message:"email sent successfully"})
 });
