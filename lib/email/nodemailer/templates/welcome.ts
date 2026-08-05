@@ -4,7 +4,7 @@
 
 export const welcomeTemplate = (name: string,) => `
 <div style="font-family: Arial, sans-serif;">
-    <h2>Hello ${name},</h2>
+    <p>Hello ${name},</p>
 
     <p>Welcome aboard! 🎉 Your account has been created successfully. We're excited to have you with us.</p>
 
