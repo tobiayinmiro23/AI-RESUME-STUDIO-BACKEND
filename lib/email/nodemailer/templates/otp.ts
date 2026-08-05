@@ -1,9 +1,5 @@
 
-
-export const otpTemplate = (
-  name: string,
-  otp: string
-) => `
+export const otpTemplate = (name: string,otp: string) => `
 <div style="font-family: Arial, sans-serif;">
     <h2>Hello ${name},</h2>
 
