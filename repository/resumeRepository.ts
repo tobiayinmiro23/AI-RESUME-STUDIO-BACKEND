@@ -8,7 +8,7 @@ class ResumeRepository{
         return await ResumeModel.create({ userId, fileName, pdfHash, extractedText, resumeData });
     }
     async getResumeDetail(userId: string) {
-        return await ResumeModel.find({ userId });
+        return await ResumeModel.find({ userId }).lean();
     }
 }
 
