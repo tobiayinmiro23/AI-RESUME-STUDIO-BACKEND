@@ -2,15 +2,14 @@ import emailjs from "@emailjs/nodejs";
 import { AppError } from "../../utils/appError";
 
 class EmailService {
-    async sendEmail (toEmail: string, subject: string, message: string) {
+    async sendEmail (toEmail: string, name: string) {
         try {
             await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
             process.env.EMAILJS_TEMPLATE_ID!,
             {
-                to_email: toEmail,
-                subject,
-                message,
+                user_email: toEmail,
+                to_name:name,
             },
             {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
