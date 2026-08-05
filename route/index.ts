@@ -1,14 +1,16 @@
 import express, { Request, Response } from "express";
 import authRoutes from "./authRoutes";
 import resumeRoutes from "./resumeRoutes";
-import emailService from "../lib/email/sendEmail";
+import emailService from "../lib/email/nodemailer/sendEmail";
 const router = express.Router()
 
 router.use('/api/v1/auth', authRoutes);
 router.use('/api/v1/resume', resumeRoutes);
 router.use('/api/v1/welcome-email', async (req:Request, res:Response)=>{
-    const response= await emailService.sendEmail("tobiayinmiro1@gmail.com","tobi")
-    res.status(response.status).json({success:true,message:"email sent successfully"})
+    // const response= await emailService.sendEmail("tobiayinmiro1@gmail.com","tobi")
+    // res.status(response.status).json({success:true,message:"email sent successfully"})
+      const response= await emailService.sendWelcomeEmail("tobiayinmiro1@gmail.com","tobi")
+    res.status(200).json(response)
 });
 
 export default router;
