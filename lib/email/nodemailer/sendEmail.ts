@@ -15,7 +15,7 @@ interface SendEmailOptions {
 }
 class EmailService {
 
- async sendWelcomeEmail({to,name}: SendEmailOptions){
+ async sendWelcomeEmail(to: string, name: string){
     try {
         const response=await transporter.sendMail({
         from: process.env.SMTP_FROM,
