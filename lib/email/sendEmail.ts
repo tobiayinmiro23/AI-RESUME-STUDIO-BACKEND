@@ -30,5 +30,3 @@ const emailService = new EmailService();
 
 export default emailService;
 
-// status: 403,
-//   text: 'API access from non-browser environments is currently disabled.
