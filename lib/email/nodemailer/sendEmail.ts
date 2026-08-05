@@ -16,7 +16,7 @@ class EmailService {
 
  async sendWelcomeEmail(to: string, name: string){
     try {
-        const response=await transporter.sendMail({
+        await transporter.sendMail({
         from: process.env.SMTP_FROM,
         to,
         subject:"AI Resume Studio",
