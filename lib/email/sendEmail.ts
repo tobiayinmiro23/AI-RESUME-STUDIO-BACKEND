@@ -14,10 +14,13 @@ class EmailService {
             {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
                 privateKey: process.env.EMAILJS_PRIVATE_KEY!,
-            }
-            );
+            });
         } catch (error) {
             throw new AppError("Unable to send email.", 500);
         }
     };
 }
+
+const emailService = new EmailService();
+
+export default emailService;
