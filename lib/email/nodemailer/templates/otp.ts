@@ -1,4 +1,4 @@
-// templates/otp.template.ts
+
 
 export const otpTemplate = (
   name: string,
