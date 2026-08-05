@@ -9,8 +9,6 @@ router.use('/api/v1/resume', resumeRoutes);
 router.use('/api/v1/welcome-email', async (req:Request, res:Response)=>{
     const response= await emailService.sendEmail("tobiayinmiro1@gmail.com","tobi")
     res.status(response.status).json(response.text)
-    
-    
 });
 
 export default router;
