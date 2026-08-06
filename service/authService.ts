@@ -5,7 +5,8 @@ import { AppError } from "../utils/appError";
 import {signInType,signUpType } from "../types/user"
 import authRepository from "../repository/authRepository"
 import { generateOtpWithExpiry } from "../utils/otp";
-
+// import emailService from "../lib/email/nodemailer/sendEmail";
+import emailService from "../lib/email/emailjs/sendEmail";
 class AuthService {
     async SignUp(req: Request ): Promise<signUpType> {
             const { email, password } = req.body;
@@ -18,7 +19,7 @@ class AuthService {
              console.log("Generated OTP:", code); // generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
             await authRepository.createOtp(email, codeHash, expiresAt);
-
+            await emailService.sendOtpEmail("tobiayinmiro1@gmail.com","tobi",codeHash)
             let data: signUpType ={ message: "Enter otp to complete signup", success: true };
             return data;
     }
@@ -48,12 +49,12 @@ class AuthService {
     }
     async VerifyOtp(req: Request): Promise<signUpType> {
         const { email, otp, reason } = req.body;
+        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         const otpRecord = await authRepository.findOtpByEmail(email);
         if (!otpRecord) throw new AppError("User does not exist", 404);
         if (new Date() > otpRecord.expiresAt) throw new AppError("OTP has expired", 400);
         const isMatch = await bcrypt.compare(otp, otpRecord.codeHash);
         if (!isMatch) throw new AppError("Invalid OTP", 400);
-        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         
         // const session = await mongoose.startSession();
         // try {
