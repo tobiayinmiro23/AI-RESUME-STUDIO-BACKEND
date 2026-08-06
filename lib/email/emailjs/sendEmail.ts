@@ -4,7 +4,7 @@ import { AppError } from "../../../utils/appError";
 dotenv.config();
 
 class EmailService {
-    async sendEmail (toEmail: string, name: string) {
+    async sendWelcomeEmail (toEmail: string, name: string) {
         try {
             const response=await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
