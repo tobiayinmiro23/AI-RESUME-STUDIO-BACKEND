@@ -27,7 +27,7 @@ class EmailService {
             to,
             subject:"OTP for AI Resume Studio authentication",
             // text,
-            html:welcomeTemplate(name),
+            html:otpTemplate(name,otp),
             });
         } catch(error) {
             if (error instanceof Error) throw new AppError(`Unable to send email: ${error.message}`, 500);
