@@ -15,8 +15,7 @@ class EmailService {
             html:welcomeTemplate(name),
             });
         } catch(error) {
-            if (error instanceof Error) throw new AppError(`Unable to send email: ${error.message}`, 500);
-            throw new AppError("Unable to send email.", 500);
+            console.log(error)
         }
     };
     async sendOtp(otp: string,to: string, name: string){
