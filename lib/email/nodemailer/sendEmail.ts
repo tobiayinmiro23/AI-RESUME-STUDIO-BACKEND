@@ -12,7 +12,6 @@ class EmailService {
             from: process.env.SMTP_FROM,
             to,
             subject:"AI Resume Studio",
-            // text,
             html:welcomeTemplate(name),
             });
         } catch(error) {
@@ -26,7 +25,6 @@ class EmailService {
             from: process.env.SMTP_FROM,
             to,
             subject:"OTP for AI Resume Studio authentication",
-            // text,
             html:otpTemplate(name,otp),
             });
         } catch(error) {
