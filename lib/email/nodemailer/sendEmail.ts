@@ -1,7 +1,7 @@
 import { transporter } from "./config";
 import { AppError } from "../../../utils/appError";
 import { otpTemplate } from "./templates/otp";
-import { welcomeTemplate, } from "./templates/welcome";
+import { welcomeTemplate } from "./templates/welcome";
 import dotenv from "dotenv";
 dotenv.config();
 
