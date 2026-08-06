@@ -4,14 +4,14 @@ import { AppError } from "../../../utils/appError";
 dotenv.config();
 
 class EmailService {
-    async sendWelcomeEmail (toEmail: string, name: string) {
+    async sendWelcomeEmail (user_email: string, to_name: string) {
         try {
             await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
             process.env.EMAILJS_TEMPLATE_ID!,
             {
-                user_email: toEmail,
-                to_name:name,
+                user_email,
+                to_name,
             },
             {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
