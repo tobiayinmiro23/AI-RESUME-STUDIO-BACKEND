@@ -58,11 +58,10 @@ class AuthService {
         // const session = await mongoose.startSession();
         // try {
         //     await session.withTransaction(async () => {
-        if (reason === "signup") {
-            await authRepository.markUserVerified(email);
-        } else if (reason === "reset-password") {
+        if (reason === "signup") await authRepository.markUserVerified(email);
+        else if (reason === "reset-password") {
             await authRepository.deleteOtpByEmail(email);
-            return { message: "password reset approved", success: true };
+            return { message: "password reset request approved", success: true };
         }
         await authRepository.deleteOtpByEmail(email);
         return { message: "OTP verified successfully", success: true };
@@ -70,15 +69,16 @@ class AuthService {
     }
     async ResendOtp(req: Request): Promise<signUpType> {
         const { email, reason } = req.body;
+        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         console.log(req.userId);
         const user = await authRepository.findUserByEmail(email);
         if (!user) throw new AppError("User not found", 404);
-        if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         if (reason === "signup" && user.verified) throw new AppError("User is already verified", 400);
         const { code , expiresAt } = generateOtpWithExpiry();
         console.log("Generated OTP:", code); // generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
+        await emailService.sendOtpEmail("tobiayinmiro1@gmail.com","tobi",codeHash)
         return { message: "OTP sent successfully", success: true };
     }
 }
