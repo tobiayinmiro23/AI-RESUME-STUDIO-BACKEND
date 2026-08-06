@@ -5,8 +5,8 @@ import { AppError } from "../utils/appError";
 import {signInType,signUpType } from "../types/user"
 import authRepository from "../repository/authRepository"
 import { generateOtpWithExpiry } from "../utils/otp";
-// import emailService from "../lib/email/nodemailer/sendEmail";
-import emailService from "../lib/email/emailjs/sendEmail";
+import emailService from "../lib/email/nodemailer/sendEmail";
+// import emailService from "../lib/email/emailjs/sendEmail";
 class AuthService {
     async SignUp(req: Request ): Promise<signUpType> {
             const { email, password } = req.body;
