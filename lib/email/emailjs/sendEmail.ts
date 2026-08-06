@@ -19,6 +19,8 @@ class EmailService {
             });
         } catch (error) {
             console.log(error)
+            if (error instanceof Error) throw new AppError(`Signup not successful unable to send otp email: ${error.message} please try again`, 500);
+            throw new AppError("Signup not successful unable to send otp email, please try again", 500);
         }
     };
     async sendOtpEmail (to_email: string, to_name: string, otp:string) {
@@ -39,8 +41,8 @@ class EmailService {
             throw new AppError(`Signup not successful unable to send otp email: ${response.text}, please try again`, 500);
         } catch (error) {
             console.log("error",error)
-            if (error instanceof Error) throw new AppError(`Signup not successful, unable to send otp email: ${error.message} please try again`, 500);
-            throw new AppError("Signup not successful, unable to send otp email, please try again", 500);
+            if (error instanceof Error) throw new AppError(`Signup not successful unable to send otp email: ${error.message} please try again`, 500);
+            throw new AppError("Signup not successful unable to send otp email, please try again", 500);
         }
     };
 }
