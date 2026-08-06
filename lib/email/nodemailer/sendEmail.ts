@@ -20,13 +20,12 @@ class EmailService {
     };
     async sendOtpEmail(to: string, name: string, otp: string){
         try {
-           const response= await transporter.sendMail({
+           await transporter.sendMail({
             from: process.env.SMTP_FROM,
             to,
             subject:"OTP for AI Resume Studio authentication",
             html:otpTemplate(name,otp),
             });
-            console.log(response)
         } catch(error) {
             if (error instanceof Error) throw new AppError(`Signup not successful, unable to send otp email: ${error.message} please try again`, 500);
             throw new AppError("Signup not successful, unable to send otp email, please try again", 500);
