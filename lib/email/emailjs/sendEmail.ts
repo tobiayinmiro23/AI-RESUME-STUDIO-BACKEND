@@ -35,7 +35,8 @@ class EmailService {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
                 privateKey: process.env.EMAILJS_PRIVATE_KEY!,
             });
-            console.log(response)
+            if (response.status === 200) return 
+            throw new AppError(`Signup not successful unable to send otp email: ${response.text}, please try again`, 500);
         } catch (error) {
             console.log("error",error)
             if (error instanceof Error) throw new AppError(`Signup not successful, unable to send otp email: ${error.message} please try again`, 500);
