@@ -27,8 +27,8 @@ class EmailService {
             html:otpTemplate(name,otp),
             });
         } catch(error) {
-            if (error instanceof Error) throw new AppError(`Unable to send email: ${error.message}`, 500);
-            throw new AppError("Unable to send email.", 500);
+            if (error instanceof Error) throw new AppError(`Unable to send otp email: ${error.message}`, 500);
+            throw new AppError("Unable to send otp email.", 500);
         }
     };
 
