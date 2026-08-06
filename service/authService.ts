@@ -65,11 +65,7 @@ class AuthService {
             const name=email.split("@")[0]
             await authRepository.markUserVerified(email);
             await emailService.sendWelcomeEmail(email,name)
-        }
-        else if (reason === "reset-password") {
-            await authRepository.deleteOtpByEmail(email);
-            return { message: "password reset request approved", success: true };
-        }
+        } else if (reason === "reset-password") return { message: "password reset request approved", success: true };
         await authRepository.deleteOtpByEmail(email);
         return { message: "OTP verified successfully", success: true };
 
