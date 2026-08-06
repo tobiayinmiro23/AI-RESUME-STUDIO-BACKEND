@@ -18,7 +18,7 @@ class EmailService {
             console.log(error)
         }
     };
-    async sendOtp(otp: string,to: string, name: string){
+    async sendOtpEmail(otp: string,to: string, name: string){
         try {
             await transporter.sendMail({
             from: process.env.SMTP_FROM,

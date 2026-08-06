@@ -21,6 +21,24 @@ class EmailService {
             console.log(error)
         }
     };
+    async sendOtpEmail (to_email: string, to_name: string, otp:string) {
+        try {
+            await emailjs.send(
+            process.env.EMAILJS_SERVICE_ID!,
+            process.env.EMAILJS_TEMPLATE_ID!,
+            {
+                to_email,
+                to_name,
+                otp
+            },
+            {
+                publicKey: process.env.EMAILJS_PUBLIC_KEY!,
+                privateKey: process.env.EMAILJS_PRIVATE_KEY!,
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    };
 }
 
 const emailService = new EmailService();
