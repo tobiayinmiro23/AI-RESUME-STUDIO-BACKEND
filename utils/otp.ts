@@ -16,7 +16,7 @@ type OtpPayload = {
   expiresAt: Date;
 };
 
-export const generateOtpWithExpiry = (length = 6, ttlMinutes = 2): OtpPayload => {
+export const generateOtpWithExpiry = (length = 6, ttlMinutes = 8): OtpPayload => {
   return {
     code: generateOtp(length),
     expiresAt: new Date(Date.now() + ttlMinutes * 60 * 1000),

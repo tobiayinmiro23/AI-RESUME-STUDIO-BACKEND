@@ -8,7 +8,7 @@ class EmailService {
         try {
             await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
-            process.env.EMAILJS_TEMPLATE_ID!,
+            process.env.EMAILJS_WELCOMETEMPLATE_ID!,
             {
                 user_email,
                 to_name,
@@ -25,10 +25,10 @@ class EmailService {
         try {
             const response=await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
-            process.env.EMAILJS_TEMPLATE_ID!,
+            process.env.EMAILJS_OTPTEMPLATE_ID!,
             {
                 to_email,
-                to_name,
+                to_name,  
                 otp
             },
             {
