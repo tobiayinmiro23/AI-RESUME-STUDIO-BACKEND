@@ -7,7 +7,6 @@ const router = express.Router()
 
 router.use('/api/v1/auth', authRoutes);
 router.use('/api/v1/resume', resumeRoutes);
-router.use('/api/v1/welcome-email', async (req:Request, res:Response)=>{
-});
+
 
 export default router;
