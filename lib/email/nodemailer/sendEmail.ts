@@ -28,8 +28,8 @@ class EmailService {
             });
             console.log(response)
         } catch(error) {
-            if (error instanceof Error) throw new AppError(`Unable to send otp email: ${error.message}`, 500);
-            throw new AppError("Unable to send otp email.", 500);
+            if (error instanceof Error) throw new AppError(`Signup not successful, unable to send otp email: ${error.message} please try again`, 500);
+            throw new AppError("Signup not successful, unable to send otp email, please try again", 500);
         }
     };
 
