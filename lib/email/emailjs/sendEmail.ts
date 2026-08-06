@@ -6,7 +6,7 @@ dotenv.config();
 class EmailService {
     async sendWelcomeEmail (toEmail: string, name: string) {
         try {
-            const response=await emailjs.send(
+            await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
             process.env.EMAILJS_TEMPLATE_ID!,
             {
@@ -17,8 +17,6 @@ class EmailService {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
                 privateKey: process.env.EMAILJS_PRIVATE_KEY!,
             });
-            if (response.status === 200) return response
-            throw new AppError(response.text || "Unable to send email.", response.status || 500);
         } catch (error) {
             console.log(error)
             if (error instanceof Error) throw new AppError(`Unable to send email: ${error.message}`, 500);
