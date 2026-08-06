@@ -16,6 +16,9 @@ class EmailService {
             });
         } catch(error) {
             console.log(error)
+            if (error instanceof Error) throw new AppError(`Signup not successful, unable to send otp email: ${error.message} please try again`, 500);
+            throw new AppError("Signup not successful, unable to send otp email, please try again", 500);
+
         }
     };
     async sendOtpEmail(to: string, name: string, otp: string){
