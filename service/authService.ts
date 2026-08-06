@@ -13,14 +13,16 @@ class AuthService {
             const user = await authRepository.findUserByEmail(email);
             if (user) throw new AppError("User already exists", 409);
             const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
-            await authRepository.createUser(email, hashedPassword);
             // otp
             const { code , expiresAt } = generateOtpWithExpiry();
              console.log("Generated OTP:", code); // generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
-            await authRepository.createOtp(email, codeHash, expiresAt);
             const name=email.split("@")[0]
+            // transaction needs to start here
             await emailService.sendOtpEmail(email,name,codeHash)
+            await authRepository.createOtp(email, codeHash, expiresAt);
+            await authRepository.createUser(email, hashedPassword);
+            // and end here
             let data: signUpType ={ message: "Enter otp to complete signup", success: true };
             return data;
     }
