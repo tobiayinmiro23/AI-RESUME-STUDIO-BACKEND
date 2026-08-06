@@ -19,7 +19,8 @@ class AuthService {
              console.log("Generated OTP:", code); // generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
             await authRepository.createOtp(email, codeHash, expiresAt);
-            await emailService.sendOtpEmail("tobiayinmiro1@gmail.com","tobi",codeHash)
+            const name=email.split("@")[0]
+            await emailService.sendOtpEmail(email,name,codeHash)
             let data: signUpType ={ message: "Enter otp to complete signup", success: true };
             return data;
     }
@@ -58,7 +59,11 @@ class AuthService {
         // const session = await mongoose.startSession();
         // try {
         //     await session.withTransaction(async () => {
-        if (reason === "signup") await authRepository.markUserVerified(email);
+        if (reason === "signup") {
+            const name=email.split("@")[0]
+            await authRepository.markUserVerified(email);
+            await emailService.sendWelcomeEmail(email,name)
+        }
         else if (reason === "reset-password") {
             await authRepository.deleteOtpByEmail(email);
             return { message: "password reset request approved", success: true };
@@ -78,7 +83,8 @@ class AuthService {
         console.log("Generated OTP:", code); // generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
-        await emailService.sendOtpEmail("tobiayinmiro1@gmail.com","tobi",codeHash)
+        const name=email.split("@")[0]
+        await emailService.sendOtpEmail(email,name,codeHash)
         return { message: "OTP sent successfully", success: true };
     }
 }
