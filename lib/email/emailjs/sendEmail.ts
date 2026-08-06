@@ -23,7 +23,7 @@ class EmailService {
     };
     async sendOtpEmail (to_email: string, to_name: string, otp:string) {
         try {
-            await emailjs.send(
+            const response=await emailjs.send(
             process.env.EMAILJS_SERVICE_ID!,
             process.env.EMAILJS_TEMPLATE_ID!,
             {
@@ -35,8 +35,11 @@ class EmailService {
                 publicKey: process.env.EMAILJS_PUBLIC_KEY!,
                 privateKey: process.env.EMAILJS_PRIVATE_KEY!,
             });
+            console.log(response)
         } catch (error) {
             console.log(error)
+            if (error instanceof Error) throw new AppError(`Unable to send otp email: ${error.message}`, 500);
+            throw new AppError("Unable to send otp email.", 500);
         }
     };
 }
