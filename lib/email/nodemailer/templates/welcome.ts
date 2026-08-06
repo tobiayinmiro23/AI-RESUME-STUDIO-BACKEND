@@ -1,4 +1,3 @@
-
 export const welcomeTemplate = (name: string) => `
 <div style="font-family: Arial, sans-serif;">
     <p>Hello ${name},</p>
