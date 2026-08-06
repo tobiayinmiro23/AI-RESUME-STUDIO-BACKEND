@@ -30,7 +30,6 @@ class ResumeService {
         } finally {
             await deleteUploadedFile(req.file.path);
         }
-        
     }
 
 }
