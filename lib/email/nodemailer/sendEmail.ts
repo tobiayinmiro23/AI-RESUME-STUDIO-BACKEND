@@ -25,7 +25,7 @@ class EmailService {
             await transporter.sendMail({
             from: process.env.SMTP_FROM,
             to,
-            subject:"AI Resume Studio",
+            subject:"OTP for AI Resume Studio authentication",
             // text,
             html:welcomeTemplate(name),
             });
