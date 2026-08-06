@@ -19,7 +19,7 @@ class AuthService {
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
             const name=email.split("@")[0]
             // transaction needs to start here
-            await emailService.sendOtpEmail(email,name,codeHash)
+            await emailService.sendOtpEmail(email,name,code)
             await authRepository.createOtp(email, codeHash, expiresAt);
             await authRepository.createUser(email, hashedPassword);
             // and end here
@@ -86,7 +86,7 @@ class AuthService {
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
         await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
         const name=email.split("@")[0]
-        await emailService.sendOtpEmail(email,name,codeHash)
+        await emailService.sendOtpEmail(email,name,code)
         return { message: "OTP sent successfully", success: true };
     }
 }
