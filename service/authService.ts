@@ -80,9 +80,9 @@ class AuthService {
         const { code , expiresAt } = generateOtpWithExpiry();
         console.log("Generated OTP:", code); // generated OTP for debugging
         const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
-        await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
         const name=email.split("@")[0]
         await emailService.sendOtpEmail(email,name,code)
+        await authRepository.updateOtpByEmail(email, codeHash, expiresAt);
         return { message: "OTP sent successfully", success: true };
     }
 }
