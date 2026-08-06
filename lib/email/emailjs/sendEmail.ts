@@ -19,7 +19,6 @@ class EmailService {
             });
         } catch (error) {
             console.log(error)
-            throw new AppError("Unable to send email.", 500);
         }
     };
 }
