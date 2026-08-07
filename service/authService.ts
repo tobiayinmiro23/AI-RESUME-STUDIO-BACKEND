@@ -59,9 +59,6 @@ class AuthService {
         if (new Date() > otpRecord.expiresAt) throw new AppError("OTP has expired", 400);
         const isMatch = await bcrypt.compare(otp, otpRecord.codeHash);
         if (!isMatch) throw new AppError("Invalid OTP", 400);
-        // const session = await mongoose.startSession();
-        // try {
-        //     await session.withTransaction(async () => {
         if (reason === "signup") {
             const name=email.split("@")[0]
             await emailService.sendWelcomeEmail(email,name)
