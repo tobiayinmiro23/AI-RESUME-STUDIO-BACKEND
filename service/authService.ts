@@ -7,6 +7,7 @@ import authRepository from "../repository/authRepository"
 import { generateOtpWithExpiry } from "../utils/otp";
 import emailService from "../lib/email/nodemailer/sendEmail";
 // import emailService from "../lib/email/emailjs/sendEmail";
+
 class AuthService {
     async SignUp(req: Request ): Promise<signUpType> {
             const { email, password } = req.body;
@@ -63,8 +64,8 @@ class AuthService {
         //     await session.withTransaction(async () => {
         if (reason === "signup") {
             const name=email.split("@")[0]
-            await authRepository.markUserVerified(email);
             await emailService.sendWelcomeEmail(email,name)
+            await authRepository.markUserVerified(email);
         } else if (reason === "reset-password") return { message: "password reset request approved", success: true };
         await authRepository.deleteOtpByEmail(email);
         return { message: "OTP verified successfully", success: true };
