@@ -53,7 +53,7 @@ async function startServer() {
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
 process.on("uncaughtException",(error) => unhandledError(error));
-process.on("uncaughtException",(reason) => unhandledError(reason));
+process.on("uncaughtRejection",(reason) => unhandledError(reason));
 
 startServer();
 
