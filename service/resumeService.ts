@@ -19,7 +19,7 @@ class ResumeService {
             yield* asyncGeneratorResponse("hashing pdf..")
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
-            if(pdfHashExists)  return asyncGeneratorResponse("Resume uploaded successfully", true);
+            if(pdfHashExists)  yield* asyncGeneratorResponse("Resume uploaded successfully", true);
             yield* asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
             yield* asyncGeneratorResponse("processing pdf..")
