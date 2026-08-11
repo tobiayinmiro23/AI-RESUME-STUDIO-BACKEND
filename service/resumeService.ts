@@ -16,11 +16,11 @@ class ResumeService {
             const userIdHeader = req.headers.userid;
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
-            yield* asyncGeneratorResponse("hashing pdf..")
+            yield* asyncGeneratorResponse("hashing pdf..","progress")
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
-            if(pdfHashExists) return yield* asyncGeneratorResponse("Resume uploaded successfully", true);
-            yield* asyncGeneratorResponse("parsing pdf..")
+            if(pdfHashExists) return yield* asyncGeneratorResponse("Resume uploaded successfully","complete", true);
+            yield* asyncGeneratorResponse("parsing pdf..", "progress")
             const content = await getPdfContent(pdfPath);
             yield* asyncGeneratorResponse("processing pdf..")
             const AIresponse = await getResumeDetail(content.text)
