@@ -22,7 +22,7 @@ class ResumeService {
             if(pdfHashExists) return yield* asyncGeneratorResponse("Resume uploaded successfully","complete", true);
             yield* asyncGeneratorResponse("parsing pdf..", "progress")
             const content = await getPdfContent(pdfPath);
-            yield* asyncGeneratorResponse("processing pdf..","complete")
+            yield* asyncGeneratorResponse("processing pdf..","progress")
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
             // console.log("AI response",AIresponse)
