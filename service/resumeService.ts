@@ -19,17 +19,18 @@ class ResumeService {
             yield* asyncGeneratorResponse("hashing pdf..")
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
-            if(pdfHashExists)  yield* asyncGeneratorResponse("Resume uploaded successfully", true);
+            if(pdfHashExists) return yield* asyncGeneratorResponse("Resume uploaded successfully", true);
             yield* asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
             yield* asyncGeneratorResponse("processing pdf..")
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
-            console.log("AI response",AIresponse)
+            // console.log("AI response",AIresponse)
             await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, result);
             // return { message: "Resume uploaded successfully", success: true };
             yield* asyncGeneratorResponse("Resume uploaded successfully", true)
         } catch (error) {
+            // console.log("AI error",error)
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
         } finally {

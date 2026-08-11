@@ -1,8 +1,9 @@
 
-export async function* asyncGeneratorResponse(currentAction: string, processingDone=false) {
+export async function* asyncGeneratorResponse(message: string, type:string, success=null) {
     yield {
-        processingDone,
-        message: currentAction
+        type,
+        success,
+        message
     };
 }
 
