@@ -16,19 +16,19 @@ class ResumeService {
             const userIdHeader = req.headers.userid;
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
-            asyncGeneratorResponse("hashing pdf..")
+            yield* asyncGeneratorResponse("hashing pdf..")
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
-            asyncGeneratorResponse("parsing pdf..")
+            yield* asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
-            asyncGeneratorResponse("processing pdf..")
+            yield* asyncGeneratorResponse("processing pdf..")
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
             console.log("AI response",AIresponse)
             await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, result);
             // return { message: "Resume uploaded successfully", success: true };
-            asyncGeneratorResponse("Resume uploaded successfully", true)
+            yield* asyncGeneratorResponse("Resume uploaded successfully", true)
         } catch (error) {
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);
