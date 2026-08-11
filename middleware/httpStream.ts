@@ -5,6 +5,5 @@ export const streamMiddleware = (req:Request,res: Response,next: NextFunction) =
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
   res.flushHeaders();
-  console.log("STREAM MIDDLEWARE:", req.headers);
   next();
 };

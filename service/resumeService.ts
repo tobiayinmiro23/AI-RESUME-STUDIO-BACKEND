@@ -22,13 +22,13 @@ class ResumeService {
             if(pdfHashExists) return yield* asyncGeneratorResponse("Resume uploaded successfully","complete", true);
             yield* asyncGeneratorResponse("parsing pdf..", "progress")
             const content = await getPdfContent(pdfPath);
-            yield* asyncGeneratorResponse("processing pdf..")
+            yield* asyncGeneratorResponse("processing pdf..","complete")
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
             // console.log("AI response",AIresponse)
             await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, result);
             // return { message: "Resume uploaded successfully", success: true };
-            yield* asyncGeneratorResponse("Resume uploaded successfully", true)
+            yield* asyncGeneratorResponse("Resume uploaded successfully","complete", true)
         } catch (error) {
             // console.log("AI error",error)
             if (error instanceof AppError) throw error;
