@@ -17,6 +17,17 @@ class resumeController {
                 }
                 res.end();
             } catch (error) {
+                if (res.headersSent) {
+                    const message = error instanceof AppError? error.message: "Error uploading resume";
+                    res.write(JSON.stringify({
+                        stage: "error",
+                        success: false,
+                        message
+                    }) + "\n");
+
+                    res.end();
+                    return;
+                }
                 if (error instanceof AppError) throw error;
                 throw new AppError("Error uploading resume", 500);
                 // res.end();
