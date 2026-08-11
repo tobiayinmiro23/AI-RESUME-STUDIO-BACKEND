@@ -1,7 +1,7 @@
 
-export async function* asyncGeneratorResponse(currentAction: string) {
+export async function* asyncGeneratorResponse(currentAction: string, processingDone=false) {
     yield {
-        stage: "parsing",
+        processingDone,
         message: currentAction
     };
 }

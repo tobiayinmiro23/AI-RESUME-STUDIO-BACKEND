@@ -9,7 +9,7 @@ import { asyncGeneratorResponse } from "../utils/asyncGeneratorResponse";
 
 
 class ResumeService {
-    async uploadResume(req: Request) {
+    async *uploadResume(req: Request) {
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = req.file.path;
         try {
@@ -22,11 +22,13 @@ class ResumeService {
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
             asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
+            asyncGeneratorResponse("processing pdf..")
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
             console.log("AI response",AIresponse)
             await resumeRepository.createResume(userId, req.file.originalname, pdfHash, content.text, result);
-            return { message: "Resume uploaded successfully", success: true };
+            // return { message: "Resume uploaded successfully", success: true };
+            asyncGeneratorResponse("Resume uploaded successfully", true)
         } catch (error) {
             if (error instanceof AppError) throw error;
             throw new AppError("Error uploading resume", 500);

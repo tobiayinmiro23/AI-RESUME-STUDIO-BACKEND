@@ -1,14 +1,26 @@
 import { Request, Response } from "express";
 import resumeService from "../service/resumeService"
 import {ResumeFileValidator} from "../utils/resumeValidator"
+import { AppError } from "../utils/appError";
 
 class resumeController {
 
     async UploadController(req: Request, res:Response) {
             ResumeFileValidator(req);
-            // console.log(req.file);
-            let result = await resumeService.uploadResume(req);
-            return res.status(200).json(result);
+            // let result = await resumeService.uploadResume(req);
+            // return res.status(200).json(result);
+            try {
+                for await ( const progress of resumeService.uploadResume(req)) {
+                    res.write(
+                        JSON.stringify(progress) + "\n"
+                    );
+                }
+                res.end();
+            } catch (error) {
+                if (error instanceof AppError) throw error;
+                throw new AppError("Error uploading resume", 500);
+                // res.end();
+            }
     }
      
 }
