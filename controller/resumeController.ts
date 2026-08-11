@@ -30,7 +30,6 @@ class resumeController {
                 }
                 if (error instanceof AppError) throw error;
                 throw new AppError("Error uploading resume", 500);
-                // res.end();
             }
     }
      
