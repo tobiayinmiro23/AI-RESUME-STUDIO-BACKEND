@@ -17,7 +17,8 @@ export const getResumeDetail = async(content:string)=>{
         },
         body: JSON.stringify({
           // model: 'openrouter/auto-beta', 
-          model: 'inclusionai/ling-3.0-flash:free', 
+          // model: 'inclusionai/ling-3.0-flash:free', 
+          model: 'inclusionai/ling-3.0-tiny:free', 
           messages: [
             {
               role: "system",
