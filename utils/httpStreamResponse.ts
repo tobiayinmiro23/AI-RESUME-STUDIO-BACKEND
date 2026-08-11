@@ -1,9 +1,9 @@
 import { Response } from "express";
 
-export const httpStreamResponse=(res:Response)=>{
+export const httpStreamResponse=(res:Response, currentAction:string)=>{
     res.write(JSON.stringify({
         stage: "parsing",
-        message: "Parsing resume..."
+        message: currentAction
     }) + "\n");
 }
 
