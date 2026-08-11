@@ -6,3 +6,5 @@ export const httpStreamResponse=(res:Response)=>{
         message: "Parsing resume..."
     }) + "\n");
 }
+
+// res.end();
