@@ -13,6 +13,9 @@ class ResumeService {
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = req.file.path;
         try {
+            console.log("HEADERS:", req.headers);
+            console.log("USERID:", req.headers.userid);
+            console.log("IS ARRAY:", Array.isArray(req.headers.userid));
             const userIdHeader = req.headers.userid;
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
