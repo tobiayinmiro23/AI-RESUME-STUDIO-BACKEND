@@ -1,10 +1,9 @@
-import { Response } from "express";
 
-export const asyncGeneratorResponse=(res:Response, currentAction:string)=>{
-    res.write(JSON.stringify({
+export async function* asyncGeneratorResponse(currentAction: string) {
+    yield {
         stage: "parsing",
         message: currentAction
-    }) + "\n");
+    };
 }
 
 // res.end();
