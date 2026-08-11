@@ -13,16 +13,13 @@ class ResumeService {
         if (!req.file) throw new AppError("Resume file is required", 400);
         const pdfPath = req.file.path;
         try {
-            console.log("HEADERS:", req.headers);
-            console.log("USERID:", req.headers.userid);
-            console.log("IS ARRAY:", Array.isArray(req.headers.userid));
             const userIdHeader = req.headers.userid;
             if (!userIdHeader || Array.isArray(userIdHeader)) throw new AppError("Unauthorized request", 400);
             const userId = userIdHeader;
             yield* asyncGeneratorResponse("hashing pdf..")
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
-            if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
+            if(pdfHashExists)  return asyncGeneratorResponse("Resume uploaded successfully", true);
             yield* asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
             yield* asyncGeneratorResponse("processing pdf..")
