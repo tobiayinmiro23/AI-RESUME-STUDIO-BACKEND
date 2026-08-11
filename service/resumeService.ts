@@ -5,6 +5,7 @@ import {hashPdf } from "../utils/pdfHash"
 import resumeRepository from "../repository/resumeRepository";
 import { getResumeDetail } from "../lib/openRouter/extractResumeDetail";
 import { deleteUploadedFile } from "../utils/deleteFile";
+import { asyncGeneratorResponse } from "../utils/asyncGeneratorResponse";
 
 
 class ResumeService {
