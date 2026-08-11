@@ -20,6 +20,7 @@ class ResumeService {
             const pdfHash= await hashPdf(pdfPath);
             const pdfHashExists = await resumeRepository.findHashByUserIdAndPdfHash(userId, pdfHash);
             if(pdfHashExists)  return { message: "Resume uploaded successfully", success: true };
+            asyncGeneratorResponse("parsing pdf..")
             const content = await getPdfContent(pdfPath);
             const AIresponse = await getResumeDetail(content.text)
             const result= AIresponse.choices[0].message.content
