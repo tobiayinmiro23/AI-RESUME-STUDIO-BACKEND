@@ -11,20 +11,17 @@ class resumeController {
             // return res.status(200).json(result);
             try {
                 for await ( const progress of resumeService.uploadResume(req)) {
-                    res.write(
-                        JSON.stringify(progress) + "\n"
-                    );
+                    res.write(JSON.stringify(progress) + "\n");
                 }
                 res.end();
             } catch (error) {
                 if (res.headersSent) {
-                    const message = error instanceof AppError? error.message: "Error uploading resume";
+                    const message = error instanceof AppError ? error.message : "Error uploading resume";
                     res.write(JSON.stringify({
                         type: "error",
                         success: false,
                         message
                     }) + "\n");
-
                     res.end();
                     return;
                 }
