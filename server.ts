@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from "express";
+import ExpressMongoSanitize from "express-mongo-sanitize";
 import router from "./route/index";
 import cors from "cors";
 import helmet from "helmet";
@@ -20,6 +21,7 @@ const DB_URL = process.env.DB_URL;
 // ---------- Global Middleware ----------
 app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL , credentials: true }));
+app.use(ExpressMongoSanitize())
 app.use(express.json({}));
 app.use(apiLimiter);
 
