@@ -36,7 +36,7 @@ export const resumeDataSchema={
           "text": "",
           "type": "responsibility | achievement"
         }
-      ]
+      ] 
     }
   ],
   "education": [

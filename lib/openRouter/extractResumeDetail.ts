@@ -14,11 +14,12 @@ export const getResumeDetail = async(content:string)=>{
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-        },
+        }, 
         body: JSON.stringify({
-          // model: 'openrouter/auto-beta', 
+        
           // model: 'inclusionai/ling-3.0-flash:free', 
-          model: 'inclusionai/ling-3.0-tiny:free', 
+          // model: 'inclusionai/ling-3.0-tiny:free', 
+          model: 'openai/gpt-oss-20b:free', 
           messages: [
             {
               role: "system",
@@ -34,14 +35,14 @@ export const getResumeDetail = async(content:string)=>{
               ],
             },
           ],
-          // response_format: {
-          //   type: "json_schema",
-          //   json_schema: {
-          //     name: "resume_extraction",
-          //     strict: true,
-          //     schema: resumeDataSchema
-          //   }
-          // }
+          response_format: {
+            type: "json_schema",
+            json_schema: {
+              name: "resume_extraction",
+              strict: true,
+              schema: resumeDataSchema
+            }
+          }
         }),
       });
       console.log(response)
