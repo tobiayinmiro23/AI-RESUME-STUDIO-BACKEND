@@ -56,6 +56,7 @@ router.use("/api/v1/test",async (req,res)=>{
 const data = await response.json();
 
 console.log(JSON.stringify(data, null, 2));
+res.json(data)
 })
 
 
