@@ -29,7 +29,7 @@ export const sign = (
       email: user.email,
     },
     JWT_SECRET,
-    { expiresIn: expiresIn ?? "7d" }
+    { expiresIn}
   );
 
   return { message: token, success: true };
