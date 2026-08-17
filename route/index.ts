@@ -40,7 +40,6 @@ router.use("/api/v1/test",async (req,res)=>{
           content: "Generate an empty resume structure using the provided schema."
         }
       ],
-
       response_format: {
         type: "json_schema",
         json_schema: {
