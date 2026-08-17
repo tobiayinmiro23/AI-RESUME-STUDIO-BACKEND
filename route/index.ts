@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./authRoutes";
 import resumeRoutes from "./resumeRoutes";
+import { resumeDataSchema } from "../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
 const router = express.Router()
 
 router.use('/api/v1/auth', authRoutes);
@@ -42,11 +43,10 @@ router.use("/api/v1/test",async (req,res)=>{
 
       response_format: {
         type: "json_schema",
-
         json_schema: {
           name: "test_schema",
           strict: true,
-          schema: testSchema
+          schema: resumeDataSchema
         }
       }
     })
