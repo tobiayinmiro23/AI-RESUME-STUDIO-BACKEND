@@ -34,11 +34,11 @@ class AuthService {
             const isMatch =await bcrypt.compare(password, user?.password);
             if (!isMatch) throw new AppError("Invalid credentials", 404);  
             if (!user.verified) throw new AppError("User is not verified", 403);
-            let token = sign({ userId: user._id.toString(), email: user.email},"30d");
+            let accessToken = sign({ userId: user._id.toString(), email: user.email},"30d");
              let data: signInType ={ message: {
                 email: user.email,
                 id: user._id.toString(),
-                token: token.message as string
+                accessToken: accessToken.message as string
             }, success: true };
             return data;
     }
