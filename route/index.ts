@@ -37,7 +37,37 @@ router.use("/api/v1/test",async (req,res)=>{
       messages: [
         {
           role: "user",
-          content: "Generate an empty resume structure using the provided schema."
+          content: `Your task is to extract information from the provided resume.
+
+You MUST populate the schema using information found in the resume.
+
+Do NOT return empty arrays when the resume contains information
+for that section.
+
+Do NOT invent information.
+
+If a field is not present in the resume, use an appropriate
+empty value.
+
+For example:
+- Missing string → ""
+- Missing number → 0
+- Missing boolean → false
+- Missing array → []
+
+For experience, education, skills, and projects:
+extract every relevant item found in the resume.
+
+"organization" = company/employer
+"position" = job title
+"description" = responsibilities and achievements
+"qualification" = degree/certificate
+"fieldOfStudy" = course/major
+
+Calculate yearsOfExperience from the employment history when
+the resume provides enough information to do so. Do not invent
+experience.
+`
         }
       ],
       response_format: {
