@@ -39,8 +39,8 @@ class AuthService {
              let data: signInType ={ message: {
                 email: user.email,
                 id: user._id.toString(),
-                accessToken: accessToken.message as string
-                refreshToken: accessToken.message as string
+                accessToken: accessToken.message as string,
+                refreshToken: refreshToken.message as string
             }, success: true };
             return data;
     }
