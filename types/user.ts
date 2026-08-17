@@ -2,7 +2,7 @@
 export interface signInType { message: {
                 email: string,
                 id: string,
-                token: string,
+                accessToken: string,
             }, success: boolean };
 
 export interface signUpType { message: string, success: boolean };
