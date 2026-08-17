@@ -31,8 +31,7 @@ class authController {
                 secure: false,  //change to true for production
                 sameSite: "lax",
             }).status(200).json(data);
-            // return res
-        }
+    }
     async VerifyOtpController(req: Request, res:Response) {
         OtpValidator(req);
         let serviceResponse = await authService.VerifyOtp(req);
