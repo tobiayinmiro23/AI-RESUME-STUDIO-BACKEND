@@ -8,4 +8,4 @@ export interface signInType {
             refreshToken:string
          };
 
-export interface signUpType { message: string, success: boolean };
+export interface responseType { message: string, success: boolean };
