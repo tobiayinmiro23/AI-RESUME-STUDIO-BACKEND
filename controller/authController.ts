@@ -42,6 +42,10 @@ class authController {
         let serviceResponse = await authService.ResetPassword(req);
         return res.status(200).json(serviceResponse);
     }
+    async RefreshTokenController(req: Request, res:Response) {
+        let serviceResponse = await authService.ResetPassword(req);
+        return res.status(200).json(serviceResponse);
+    }
 }
 
 export default new authController();
