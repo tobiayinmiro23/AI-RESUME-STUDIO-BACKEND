@@ -37,7 +37,7 @@ router.use("/api/v1/test",async (req,res)=>{
       messages: [
         {
           role: "user",
-          content: "My name is Tobi and I am 25 years old."
+          content: "Generate an empty resume structure using the provided schema."
         }
       ],
 
