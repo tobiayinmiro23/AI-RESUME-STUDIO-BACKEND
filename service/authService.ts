@@ -1,15 +1,15 @@
 import { Request } from "express";
 import bcrypt from "bcrypt";
-import {sign} from "../lib/jwt"
+import {sign, verify} from "../lib/jwt"
 import { AppError } from "../utils/appError";
-import {signInType,signUpType } from "../types/user"
+import {signInType,responseType } from "../types/user"
 import authRepository from "../repository/authRepository"
 import { generateOtpWithExpiry } from "../utils/otp";
 import emailService from "../lib/email/nodemailer/sendEmail";
 // import emailService from "../lib/email/emailjs/sendEmail";
 
 class AuthService {
-    async SignUp(req: Request ): Promise<signUpType> {
+    async SignUp(req: Request ): Promise<responseType> {
             const { email, password } = req.body;
             const user = await authRepository.findUserByEmail(email);
             if (user) throw new AppError("User already exists", 409);
@@ -24,7 +24,7 @@ class AuthService {
             await authRepository.createOtp(email, codeHash, expiresAt);
             await authRepository.createUser(email, hashedPassword);
             // and end here
-            let data: signUpType ={ message: "Enter otp to complete signup", success: true };
+            let data: responseType ={ message: "Enter otp to complete signup", success: true };
             return data;
     }
      async SignIn(req: Request): Promise<signInType> {
@@ -47,7 +47,7 @@ class AuthService {
                 };
             return data;
     }
-    async ResetPassword(req: Request): Promise<signUpType> {
+    async ResetPassword(req: Request): Promise<responseType> {
         const { email, password } = req.body;
         const user = await authRepository.findUserByEmail(email);
         if (!user) throw new AppError("Email not found", 404);
@@ -56,7 +56,17 @@ class AuthService {
         await authRepository.updatePasswordByEmail(email, hashedPassword);
         return { message: "Password reset successful", success: true };
     }
-    async VerifyOtp(req: Request): Promise<signUpType> {
+    async RefreshToken(req: Request): Promise<responseType> {
+        const refreshToken = req.cookies.refreshToken;
+        if (!refreshToken) throw new AppError("Refresh token not found", 401);
+        const decodedToken = verify(refreshToken);
+        if (!decodedToken) throw new AppError("Invalid refresh token", 401);
+        const user = await authRepository.findUserByEmail(decodedToken.email);
+        if (!user) throw new AppError("User not found", 404);
+        const newAccessToken = sign({ userId: user._id.toString(), email: user.email},"15m");
+        return { message: newAccessToken.message as string, success: true };
+    }
+    async VerifyOtp(req: Request): Promise<responseType> {
         const { email, otp, reason } = req.body;
         if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         const otpRecord = await authRepository.findOtpByEmail(email);
@@ -73,7 +83,7 @@ class AuthService {
         return { message: "OTP verified successfully", success: true };
 
     }
-    async ResendOtp(req: Request): Promise<signUpType> {
+    async ResendOtp(req: Request): Promise<responseType> {
         const { email, reason } = req.body;
         if  (reason !== "signup" && reason !== "reset-password") throw new AppError("Invalid otp request", 400);
         console.log(req.userId);
