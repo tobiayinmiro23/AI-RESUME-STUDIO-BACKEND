@@ -4,7 +4,6 @@ export interface signInType {
                 email: string,
                 id: string,
                 accessToken: string,
-                refreshToken: string,
             }, success: boolean
             refreshToken:string
          };
