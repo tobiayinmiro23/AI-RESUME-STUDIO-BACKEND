@@ -60,7 +60,7 @@ class AuthService {
         const refreshToken = req.cookies.refreshToken;
         if (!refreshToken) throw new AppError("Refresh token not found", 401);
         const decodedToken = verify(refreshToken);
-        const newAccessToken = sign({ userId: user._id.toString(), email: user.email},"15m");
+        const newAccessToken = sign({ userId: decodedToken.userId.toString(), email: decodedToken.email},"15m");
         return { message: newAccessToken.message as string, success: true };
     }
     async VerifyOtp(req: Request): Promise<responseType> {
