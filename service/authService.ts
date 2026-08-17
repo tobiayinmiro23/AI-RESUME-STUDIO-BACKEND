@@ -36,12 +36,14 @@ class AuthService {
             if (!user.verified) throw new AppError("User is not verified", 403);
             let refreshToken = sign({ userId: user._id.toString(), email: user.email},"30d");
             let accessToken = sign({ userId: user._id.toString(), email: user.email},"15m");
-             let data: signInType ={ message: {
-                email: user.email,
-                id: user._id.toString(),
-                accessToken: accessToken.message as string,
-                refreshToken: refreshToken.message as string
-            }, success: true };
+             let data: signInType ={
+                    message: {
+                        email: user.email,
+                        id: user._id.toString(),
+                        accessToken: accessToken.message as string,
+                    }, success: true,
+                    refreshToken: refreshToken.message as string
+                };
             return data;
     }
     async ResetPassword(req: Request): Promise<signUpType> {
