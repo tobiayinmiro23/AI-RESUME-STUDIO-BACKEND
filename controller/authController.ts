@@ -25,8 +25,14 @@ class authController {
      async SignInController(req: Request, res:Response) {
              AuthValidator(req);
             let serviceResponse = await authService.SignIn(req);
-            return res.status(200).json(serviceResponse);
-    }
+            const {refreshToken,...data}=serviceResponse
+            res.cookie("refreshToken", refreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "lax",
+            }).status(200).json(data);
+            // return res
+        }
     async VerifyOtpController(req: Request, res:Response) {
         OtpValidator(req);
         let serviceResponse = await authService.VerifyOtp(req);

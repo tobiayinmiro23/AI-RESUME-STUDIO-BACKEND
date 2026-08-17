@@ -41,7 +41,8 @@ class AuthService {
                         email: user.email,
                         id: user._id.toString(),
                         accessToken: accessToken.message as string,
-                    }, success: true,
+                    }, 
+                    success: true,
                     refreshToken: refreshToken.message as string
                 };
             return data;
