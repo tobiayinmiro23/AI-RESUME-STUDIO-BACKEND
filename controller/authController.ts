@@ -28,7 +28,7 @@ class authController {
             const {refreshToken,...data}=serviceResponse
             res.cookie("refreshToken", refreshToken, {
                 httpOnly: true,
-                secure: true,
+                secure: false,  //change to true for production
                 sameSite: "lax",
             }).status(200).json(data);
             // return res
