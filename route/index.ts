@@ -82,7 +82,7 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
         response.status
       );
     }
-    return data;
+     res.json(data);
   } catch (error) {
     console.log(error);
     if (error instanceof AppError) throw error;
