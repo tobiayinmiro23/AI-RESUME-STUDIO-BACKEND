@@ -14,7 +14,7 @@ class AuthService {
             const user = await authRepository.findUserByEmail(email);
             if (user) throw new AppError("User already exists", 409);
             const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS) || 10);
-            // otp
+            // otp 
             const { code , expiresAt } = generateOtpWithExpiry();
              console.log("Generated OTP:", code); // generated OTP for debugging
             const codeHash = await bcrypt.hash(code, Number(process.env.SALT_ROUNDS) || 10);
