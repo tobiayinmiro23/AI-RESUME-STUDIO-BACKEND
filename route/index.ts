@@ -3,11 +3,12 @@ import authRoutes from "./authRoutes";
 import resumeRoutes from "./resumeRoutes";
 import { resumeDataSchema } from "../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
 import { AppError } from "../utils/appError";
+import { resumeContent as content } from "../aiCallInformation/AI-Resume-Content-Extractor/parsedResume";
 const router = express.Router()
 
 router.use('/api/v1/auth', authRoutes);
 router.use('/api/v1/resume', resumeRoutes);
- const getResumeDetail = async (content: string) => {
+ const getResumeDetail = async () => {
   try {
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
