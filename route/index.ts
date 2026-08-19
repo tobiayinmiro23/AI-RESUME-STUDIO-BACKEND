@@ -20,7 +20,8 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "openai/gpt-oss-20b:free",
+          // model: "openai/gpt-oss-20b:free",
+          model: "openrouter/free",
           messages: [
             {
               role: "system",
