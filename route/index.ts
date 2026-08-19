@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import authRoutes from "./authRoutes";
 import resumeRoutes from "./resumeRoutes";
 import { resumeDataSchema } from "../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
@@ -8,7 +8,8 @@ const router = express.Router()
 
 router.use('/api/v1/auth', authRoutes);
 router.use('/api/v1/resume', resumeRoutes);
- const getResumeDetail = async () => {
+ 
+router.use("/api/v1/test",async (req:Request,res:Response)=> {
   try {
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
@@ -85,10 +86,9 @@ router.use('/api/v1/resume', resumeRoutes);
   } catch (error) {
     console.log(error);
     if (error instanceof AppError) throw error;
-    throw new AppError("Unable to communicate with the AI service, try again later",500);
+    throw new AppError("Unable to communicate with the AI service, try again later", 500);
   }
-};
-router.use("/api/v1/test",getResumeDetail)
+})
 
 
 export default router;
