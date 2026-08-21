@@ -30,7 +30,7 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
             },
             {
               role: "user",
-              content: `RESUME CONTENT:${content}`,
+              content: `RESUME CONTENT:${content}, JSON SCHEMA: ${resumeDataSchema}`,
             },
           ],
           response_format: {
