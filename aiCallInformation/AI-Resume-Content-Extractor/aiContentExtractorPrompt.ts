@@ -55,42 +55,6 @@ Each additional section should contain:
 
 15. Preserve the meaning of the resume. Do not rewrite or improve it.
 
-SECTION MAPPING:
-
-experience:
-- jobs
-- freelance work
-- internships
-- professional roles
-- employers
-
-education:
-- universities
-- schools
-- degrees
-- certificates
-- academic qualifications
-
-skills:
-- technologies
-- programming languages
-- frameworks
-- tools
-- professional skills
-
-projects:
-- named software projects
-- personal projects
-- portfolio projects
-
-additionalSections:
-- certifications
-- awards
-- languages
-- volunteering
-- publications
-- other information that does not belong elsewhere
-
 CLASSIFICATION AND CONSISTENCY RULES:
 
 - Extract each piece of information into the most appropriate section
