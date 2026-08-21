@@ -91,5 +91,50 @@ additionalSections:
 - publications
 - other information that does not belong elsewhere
 
+CLASSIFICATION AND CONSISTENCY RULES:
+
+- Extract each piece of information into the most appropriate section
+  of the JSON schema.
+
+- Information must only appear in the section where it logically belongs.
+
+- Do not place the same item in multiple sections unless the resume
+  explicitly presents it as separate information.
+
+- Do not create duplicate entries within any array.
+
+- Before returning the final JSON, check every section and ensure that:
+
+  - metadata contains only information describing the resume.
+  - candidate contains only the candidate's personal and contact information.
+  - professionalProfile contains only professional identity and career-level information.
+  - summary contains only the candidate's professional summary.
+  - experience contains only employment, professional work, freelance work,
+    internships, or other work experience.
+  - education contains only academic institutions, degrees, qualifications,
+    certificates, or academic study.
+  - skills contains only skills, technologies, tools, or professional competencies.
+  - projects contains only distinct projects or project work.
+  - additional Sections contains only relevant information that does not
+    logically belong in the other defined sections, these could include  certifications, awards,languages, volunteering, publications 
+    other information that does not belong elsewhere
+
+- Do not move information into another section merely to populate an
+  empty field or array.
+
+- If information does not clearly belong to a schema field or section,
+  use the appropriate empty value instead of guessing.
+
+- Do not duplicate the same job, education entry, skill, project,
+  link, or other information.
+
+- Before returning the final JSON, review the entire output for:
+  1. incorrect classification,
+  2. duplicated information,
+  3. misplaced information,
+  4. invented information,
+  5. fields populated with values that do not match their meaning.
+
+- Return only the final JSON after this consistency check.
 Return only valid JSON matching the schema.
 `
