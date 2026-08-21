@@ -29,9 +29,10 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
               content: resumeContentExtractorPrompt
             },
             {
-              role: "user",
-              content: `RESUME CONTENT:${content}, JSON SCHEMA: ${resumeDataSchema}`,
-            },
+              role:"user",
+              content: `
+                RESUME CONTENT:${content} JSON SCHEMA:${JSON.stringify(resumeDataSchema, null, 2)}`.trim(),
+            }
           ],
           response_format: {
             type: "json_schema",
