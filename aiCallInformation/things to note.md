@@ -9,3 +9,5 @@
 5. the current open router request with the updated prompt, and json schema in the prompt works the best compared to only putting the "response_format" field but for the description field in the experience section the "type" field is not added just the "text"
 
 6. i need to remove the description field in the education section
+
+7. the AI response is much closer to the schema but not 100% complete, it ends after education section and that array is not closed, this would throw an error
