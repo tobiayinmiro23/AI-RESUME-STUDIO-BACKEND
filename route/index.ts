@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import authRoutes from "./authRoutes";
 import resumeRoutes from "./resumeRoutes";
+import { resumeContentExtractorPrompt } from "../aiCallInformation/AI-Resume-Content-Extractor/aiContentExtractorPrompt";
 import { resumeDataSchema } from "../aiCallInformation/AI-Resume-Content-Extractor/resumeDataSchema";
 import { AppError } from "../utils/appError";
 import { resumeContent as content } from "../aiCallInformation/AI-Resume-Content-Extractor/parsedResume";
@@ -25,35 +26,7 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
           messages: [
             {
               role: "system",
-              content: `
-                You are a resume information extraction system.
-
-                Extract information from the resume and return data that strictly
-                matches the provided JSON schema.
-
-                Do not invent information.
-
-                If information is missing:
-
-                - string → ""
-                - number → 0
-                - boolean → false
-                - array → []
-
-                Do not return empty arrays if relevant information exists in the resume.
-
-                For experience, education, skills, and projects, extract every
-                relevant item found in the resume.
-
-                "organization" means company/employer.
-                "position" means job title.
-                "description" contains responsibilities and achievements.
-                "qualification" means degree/certificate.
-                "fieldOfStudy" means course/major.
-
-                Calculate yearsOfExperience only when the employment history provides
-                enough information.
-              `.trim(),
+              content: resumeContentExtractorPrompt
             },
             {
               role: "user",
