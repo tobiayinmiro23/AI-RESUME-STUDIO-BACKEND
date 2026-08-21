@@ -55,6 +55,25 @@ Each additional section should contain:
 
 15. Preserve the meaning of the resume. Do not rewrite or improve it.
 
+FIELD VALUE RULES:
+
+- Populate each field only with information that matches the meaning
+  of that specific field.
+
+- Do not use a value merely because it is related to the section;
+  it must be appropriate for the specific field.
+
+- Do not guess, reinterpret, or force information into a field.
+
+- If a value cannot be directly extracted or reliably determined,
+  use the appropriate empty value.
+- employmentType refers to the nature of employment, such as
+  "Full-time", "Part-time", "Contract", "Internship", or "Freelance".
+
+- Do not use "Remote", "Onsite", or "Hybrid" as employmentType.
+
+- If the employment type is not stated, return "".
+
 CLASSIFICATION AND CONSISTENCY RULES:
 
 - Extract each piece of information into the most appropriate section
