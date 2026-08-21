@@ -83,7 +83,33 @@ CLASSIFICATION AND CONSISTENCY RULES:
 
 - Do not place the same item in multiple sections unless the resume
   explicitly presents it as separate information.
+  Examples:
 
+  - Employment, jobs, professional roles, employers, responsibilities,
+    and work achievements belong only in "experience".
+
+  - Schools, universities, degrees, certificates, courses, academic study,
+    and academic achievements belong only in "education" unless a more
+    appropriate dedicated section exists.
+
+  - Technical abilities, tools, technologies, and competencies belong only
+    in "skills".
+
+  - Personal or professional projects belong only in "projects".
+
+  - Certifications belong only in "certifications".
+
+  - Contact links and personal contact information belong only in
+    "candidate".
+
+  - Resume-level descriptive information belongs only in "metadata" or
+    "professionalProfile", depending on the meaning of the field.
+
+  Do not place information in a section merely to fill an empty required
+  field.
+
+  Do not repeat information across multiple sections unless the schema
+  explicitly requires the same information in more than one place.
 - Do not create duplicate entries within any array.
 
 - Before returning the final JSON, check every section and ensure that:
