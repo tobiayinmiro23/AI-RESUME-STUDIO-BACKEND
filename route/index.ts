@@ -49,6 +49,7 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
     const data = await response.json();
 
     if (!response.ok) {
+      console.log(response)
       throw new AppError(
         data.error?.message ??
           data.message ??
