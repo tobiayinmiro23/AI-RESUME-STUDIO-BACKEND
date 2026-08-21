@@ -119,5 +119,34 @@ CLASSIFICATION AND CONSISTENCY RULES:
   5. fields populated with values that do not match their meaning.
 
 - Return only the final JSON after this consistency check.
+
+FINAL VALIDATION AND CORRECTION:
+
+Before returning the response, validate the complete extracted result
+against the provided JSON schema and the extraction rules.
+
+If you identify any incorrect classification, duplicated information,
+misplaced information, invented information, or a value that does not
+match the meaning of its field, correct or restructure the output before
+returning it.
+
+Reassign information to the appropriate field or section when necessary,
+remove duplicate or incorrectly placed entries, and replace unsupported
+or incorrectly inferred values with the appropriate empty value.
+
+Do not return the preliminary extraction if it contains errors detected
+during validation. Return only the corrected version.
+
+The final response must be the corrected, internally consistent version
+of the extracted data and must strictly match the provided JSON schema.
+
+Before returning the final response, correct, restructure, add, remove,
+or reassign information where necessary to ensure that the output
+conforms to both the extraction rules and the JSON schema.
+
+Do not return an intermediate or partially corrected result.
+Return only the final corrected JSON that strictly conforms to the
+provided JSON schema.
+
 Return only valid JSON matching the schema.
 `
