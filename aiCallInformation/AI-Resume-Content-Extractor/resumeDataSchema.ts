@@ -128,18 +128,6 @@
           startDate: { type: "string" },
           endDate: { type: "string" },
           currentlyStudying: { type: "boolean" },
-
-          description: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                text: { type: "string" }
-              },
-              required: ["text"],
-              additionalProperties: false
-            }
-          }
         },
         required: [
           "institution",
