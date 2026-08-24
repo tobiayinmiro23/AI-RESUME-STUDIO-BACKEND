@@ -138,7 +138,6 @@
           "startDate",
           "endDate",
           "currentlyStudying",
-          "description"
         ],
         additionalProperties: false
       }
