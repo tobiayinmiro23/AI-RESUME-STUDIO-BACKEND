@@ -8,5 +8,5 @@
 
 5. the current open router request with the updated prompt, and json schema in the prompt works the best compared to only putting the "response_format" field but for the description field in the experience section the "type" field is not added just the "text"
 
-          
-6. on the open router website it says "liquid/lfm-2.5-2.6b:free" consorms to jsor_response but it dosent also  it stoped while working due to token length limit
+## notes on liquid/lfm-2.5-2.6b:free model          
+on the open router website it says "liquid/lfm-2.5-2.6b:free" consorms to jsor_response but it didn't work the first time when i put all the parameters also  it stoped while working due to token length limit but when i added the response schema i expect as part of the prompt in addition to the response_format property, it followed the schema 100% and it didnt stop as a result of token length, the AI completed its task and returned the complete result to me  

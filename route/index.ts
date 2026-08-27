@@ -31,9 +31,9 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
             {
               role:"user",
               content: `
-                RESUME CONTENT:${content} 
+                RESUME CONTENT:${content} JSON SCHEMA:${JSON.stringify(resumeDataSchema, null, 2)}
                 `.trim(),
-                // JSON SCHEMA:${JSON.stringify(resumeDataSchema, null, 2)}
+                // 
             }
           ],
           response_format: {
