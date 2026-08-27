@@ -21,7 +21,8 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "z-ai/glm-5.2:free",
+          // model: "z-ai/glm-5.2:free",
+          model: "liquid/lfm-2.5-2.6b:free",
           // model: "openrouter/free",
           messages: [
             {
