@@ -21,8 +21,8 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // model: "openai/gpt-oss-20b:free",
-          model: "openrouter/free",
+          model: "liquid/lfm-2.5-2.6b:free",
+          // model: "openrouter/free",
           messages: [
             {
               role: "system",
@@ -31,7 +31,9 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
             {
               role:"user",
               content: `
-                RESUME CONTENT:${content} JSON SCHEMA:${JSON.stringify(resumeDataSchema, null, 2)}`.trim(),
+                RESUME CONTENT:${content} 
+                `.trim(),
+                // JSON SCHEMA:${JSON.stringify(resumeDataSchema, null, 2)}
             }
           ],
           response_format: {
