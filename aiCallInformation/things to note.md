@@ -11,3 +11,9 @@
 ## notes on liquid/lfm-2.5-2.6b:free model          
 on the open router website it says "liquid/lfm-2.5-2.6b:free" consorms to jsor_response but it didn't work the first time when i put all the parameters also  it stoped while working due to token length limit but when i added the response schema i expect as part of the prompt in addition to the response_format property, it followed the schema 100% and it didnt stop as a result of token length, the AI completed its task and returned the complete result to me, for both scenarios the AI responds in just over a minute.
 - the education start and end date does not work correctly "startDate": "2009-09-01","endDate":"2013-06-30", 
+
+## notes on nvidia/nemotron-3-super-120b-a12b:free
+nemotron works well both with the expected jso nschema as part of the prompt with the response_format property and with the response_format property only ( expected json schema not in the prompt), it follows the schema to the letter and responds in about 1 mins 30s
+
+
+
