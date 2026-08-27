@@ -17,3 +17,5 @@ nemotron works well both with the expected jso nschema as part of the prompt wit
 
 
 
+## General notes
+for both AI models, date related format comes like this  {"startDate": "2025-01", "endDate": "2026-12"}, for  a start date of 2025 and end date of 2026, the prompt for this could be fine tuned
