@@ -22,7 +22,9 @@ router.use("/api/v1/test",async (req:Request,res:Response)=> {
         },
         body: JSON.stringify({
           // model: "z-ai/glm-5.2:free",
-          model : "nvidia/nemotron-3-super-120b-a12b:free",
+          // model : "nvidia/nemotron-3-super-120b-a12b:free",
+          model: "nvidia/nemotron-3.5-lightning:free",
+          
           // model: "liquid/lfm-2.5-2.6b:free",
           // model: "openrouter/free",
           messages: [

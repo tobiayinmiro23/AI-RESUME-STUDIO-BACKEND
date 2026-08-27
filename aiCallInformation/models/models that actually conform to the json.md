@@ -1,1 +1,2 @@
 "model": "nvidia/nemotron-3-super-120b-a12b:free",
+model: "liquid/lfm-2.5-2.6b:free",
