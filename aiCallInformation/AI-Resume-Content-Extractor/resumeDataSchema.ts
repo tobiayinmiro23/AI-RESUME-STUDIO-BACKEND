@@ -114,7 +114,6 @@
         additionalProperties: false
       }
     },
-
     education: {
       type: "array",
       items: {
